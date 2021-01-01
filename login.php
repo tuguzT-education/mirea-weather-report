@@ -14,8 +14,33 @@
 <header>
 	<h2>Weather Report</h2>
 </header>
-<main>
-
+<main class='center_parent'>
+	<div class='center_parent'>
+		<ul class='no_style'>
+			<li class='text_center'>
+				<h3>Авторизация</h3>
+			</li>
+			<li>
+				<form method='post'>
+					<div class='center_parent'>
+						<div class='input'>
+							<input id='email' type='email' required placeholder=' '>
+							<label for='email'>Email</label>
+						</div>
+					</div>
+					<div class='center_parent'>
+						<div class='input'>
+							<input id='password' type='password' required placeholder=' '>
+							<label for='password'>Пароль</label>
+						</div>
+					</div>
+					<div class='center_parent'>
+						<button type='submit'>Войти</button>
+					</div>
+				</form>
+			</li>
+		</ul>
+	</div>
 </main>
 </body>
 </html>
