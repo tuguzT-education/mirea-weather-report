@@ -1,0 +1,83 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap');
+
+/* Define color variables */
+:root {
+	--wr_dark_blue: rgb(57, 125, 255);
+	--wr_blue: rgb(148, 179, 252);
+	--wr_light_blue: rgb(198, 212, 252);
+	--wr_light_blue_plus: rgb(246, 249, 255);
+	--wr_gray: rgb(191, 199, 214);
+	--wr_dark_gray: rgb(85, 94, 110);
+	--wr_darker_gray: rgb(38, 46, 57);
+	--wr_dark_gray_plus: rgb(3, 10, 23);
+	--wr_tomato: rgb(255, 103, 70);
+	--wr_green_tea: rgb(132, 178, 0);
+
+	--wr_text: var(--wr_darker_gray);
+	--wr_background: white;
+	--wr_header: var(--wr_blue);
+
+	--wr_primary: var(--wr_dark_blue);
+}
+
+/* Override some colors for dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--wr_text: var(--wr_light_blue_plus);
+		--wr_background: #121212;
+		--wr_header: var(--wr_darker_gray);
+	}
+}
+
+/* Set font */
+* {
+	font-family: 'Exo 2', Arial, sans-serif;
+}
+
+/* Set selection behaviour */
+*::selection {
+	color: var(--wr_light_blue_plus);
+	background-color: var(--wr_dark_blue);
+}
+
+body {
+	color: var(--wr_text);
+	background-color: var(--wr_background);
+	margin: 0;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+body > * {
+	padding: 0 5vw;
+}
+
+header, footer {
+	background-color: var(--wr_header);
+	display: block;
+	flex: 0 0 auto;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+/* Set scrollbar behaviour for webkit browsers */
+::-webkit-scrollbar-track {
+	background-color: var(--wr_dark_gray_plus);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--wr_dark_gray);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--wr_dark_blue);
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
