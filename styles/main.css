@@ -22,13 +22,13 @@
 }
 
 /* Override some colors for dark theme */
-/*@media (prefers-color-scheme: dark) {*/
-/*	:root {*/
-/*		--wr_text: var(--wr_light_blue_plus);*/
-/*		--wr_background: #121212;*/
-/*		--wr_header: var(--wr_darker_gray);*/
-/*	}*/
-/*}*/
+@media (prefers-color-scheme: dark) {
+	:root {
+		--wr_text: var(--wr_light_blue_plus);
+		--wr_background: #121212;
+		--wr_header: var(--wr_darker_gray);
+	}
+}
 
 /* Set font and other global properties */
 * {
