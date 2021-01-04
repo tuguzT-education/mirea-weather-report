@@ -4,12 +4,13 @@
 /* Define color variables */
 :root {
 	--wr_dark_blue: rgb(57, 125, 255);
-	--wr_blue: rgb(148, 179, 252);
-	--wr_light_blue: rgb(198, 212, 252);
+	--wr_blue: rgb(148, 179, 255);
+	--wr_light_blue: rgb(198, 212, 255);
 	--wr_light_blue_plus: rgb(246, 249, 255);
-	--wr_gray: rgb(191, 199, 214);
-	--wr_dark_gray: rgb(85, 94, 110);
-	--wr_darker_gray: rgb(38, 46, 57);
+	--wr_light_gray: rgb(191, 199, 214);
+	--wr_gray: rgb(85, 94, 110);
+	--wr_dark_gray: rgb(54, 60, 71);
+	--wr_darker_gray: rgb(32, 38, 48);
 	--wr_dark_gray_plus: rgb(3, 10, 23);
 	--wr_tomato: rgb(255, 103, 70);
 	--wr_green_tea: rgb(132, 178, 0);
@@ -17,6 +18,8 @@
 	--wr_text: var(--wr_darker_gray);
 	--wr_background: white;
 	--wr_header: var(--wr_blue);
+	--wr_autofill_background: var(--wr_blue);
+	--wr_panel: var(--wr_light_blue);
 
 	--wr_primary: var(--wr_dark_blue);
 }
@@ -27,6 +30,8 @@
 		--wr_text: var(--wr_light_blue_plus);
 		--wr_background: #121212;
 		--wr_header: var(--wr_darker_gray);
+		--wr_autofill_background: var(--wr_dark_gray);
+		--wr_panel: var(--wr_darker_gray);
 	}
 }
 
@@ -72,22 +77,36 @@ main {
 	flex: 1 0 auto;
 }
 
+a {
+	color: var(--wr_primary);
+}
+
+a:focus {
+	color: var(--wr_tomato);
+}
+
 /* Set input style */
 div.input {
 	position: relative;
 }
 
+div.input > span.error {
+	margin: 0.4em;
+}
+
 input {
 	display: block;
 	background: transparent;
-	padding: 0.4em 0.4em;
+	padding: 0.4em;
 	border: none;
 	border-bottom: 0.15em solid var(--wr_text);
+	border-radius: 0;
 	color: var(--wr_text);
 	font-size: 1em;
-	transition: 0.3s;
-	min-width: 20vw;
+	min-width: 30vw;
+	width: 100%;
 	max-width: 70vw;
+	transition: 0.3s;
 }
 
 input::placeholder {
@@ -110,7 +129,7 @@ input + label {
 }
 
 input:focus + label {
-	top: -1em;
+	top: -1.4em;
 	font-weight: bold;
 	font-size: 0.85em;
 	color: var(--wr_primary);
@@ -121,7 +140,7 @@ input:not(:focus):valid:not(:placeholder-shown) {
 }
 
 input:not(:focus):valid:not(:placeholder-shown) + label {
-	top: -1em;
+	top: -1.4em;
 	font-weight: bold;
 	font-size: 0.85em;
 	color: var(--wr_green_tea);
@@ -132,7 +151,7 @@ input:not(:focus):invalid:not(:placeholder-shown) {
 }
 
 input:not(:focus):invalid:not(:placeholder-shown) + label {
-	top: -1em;
+	top: -1.4em;
 	font-weight: bold;
 	font-size: 0.85em;
 	color: var(--wr_tomato);
@@ -143,7 +162,6 @@ button {
 	cursor: pointer;
 	user-select: none;
 	font-weight: bold;
-	font-size: 1em;
 	color: var(--wr_text);
 	background-color: transparent;
 	border: 0.15em solid var(--wr_primary);
@@ -183,6 +201,16 @@ button:disabled:hover {
 ul.no_style {
 	padding: 0;
 	list-style: none;
+}
+
+.panel {
+	background: var(--wr_panel);
+	border: none;
+	border-radius: 0.5em;
+}
+
+.panel.input_form {
+	margin: 2em;
 }
 
 .text_center {
@@ -231,4 +259,28 @@ ul.no_style {
 ::-webkit-scrollbar {
 	width: 0.8em;
 	height: 0.8em;
+}
+
+/* Set autofill style for webkit browsers */
+:-webkit-autofill {
+	caret-color: var(--wr_text);
+	-webkit-text-fill-color: var(--wr_text);
+	-webkit-box-shadow: 0 0 0 2em var(--wr_autofill_background) inset;
+	transition: 0s;
+}
+
+:-webkit-autofill::selection {
+	-webkit-text-fill-color: var(--wr_light_blue_plus);
+	background-color: var(--wr_dark_blue);
+}
+
+input:-webkit-autofill:not(:focus):not(:placeholder-shown) {
+	border-bottom-color: var(--wr_text);
+}
+
+input:-webkit-autofill:not(:focus):not(:placeholder-shown) + label {
+	top: -1.4em;
+	font-weight: bold;
+	font-size: 0.85em;
+	color: var(--wr_text);
 }
