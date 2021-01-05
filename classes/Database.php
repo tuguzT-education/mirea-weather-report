@@ -38,6 +38,8 @@ namespace WeatherReport {
 					case 'string':
 						$types .= 's';
 						break;
+					default:
+						throw new \Exception('Wrong argument type');
 				}
 			}
 			$stmt->bind_param($types, ...$args);
