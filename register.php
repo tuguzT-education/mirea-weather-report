@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 </head>
 <body>
 <header>
-	<h2>Weather Report</h2>
+	<h3>Weather Report</h3>
 </header>
 <main class='center_parent'>
 	<div class='center_parent panel input_form'>

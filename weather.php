@@ -17,43 +17,30 @@ $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гос�
 	<meta name='color-scheme' content='dark light'>
 	<meta name='keywords' content='weather, погода, прогноз погоды'>
 	<link href='styles/main.css' rel='stylesheet' type='text/css'>
-	<title><?php echo $fullName; ?> | Weather Report</title>
+	<title>Карта/Погода | Weather Report</title>
 </head>
 <body>
 <header>
 	<h3 class='float_left margin_1_right'>Weather Report</h3>
-    <a href='weather.php' class='button float_left margin_05_vert'>Карта/Погода</a>
-    <?php
-    if (loggedIn()) {
-    ?>
-    <nav role='navigation' class='float_right'>
-        <ul class='no_style menu margin_05_vert'>
-            <li><a href='#' class='button'><?php echo $fullName; ?></a>
-                <ul class='no_style dropdown'>
-                    <li><a href='account.php'>Личный кабинет</a></li>
-                    <li><a href='logout.php'>Выйти</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <?php
-    }
-    ?>
-</header>
-<main>
 	<?php
 	if (loggedIn()) {
 	?>
-	<!-- todo add content -->
-	<?php
-	} else {
-	?>
-	<h4 class='center_parent text_center error'>
-		Вы вошли как гость, поэтому функции обычного пользователя вам недоступны!
-	</h4>
+	<nav role='navigation' class='float_right'>
+		<ul class='no_style menu margin_05_vert'>
+			<li><a href='#' class='button'><?php echo $fullName; ?></a>
+				<ul class='no_style dropdown'>
+					<li><a href='account.php'>Личный кабинет</a></li>
+					<li><a href='logout.php'>Выйти</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
 	<?php
 	}
 	?>
+</header>
+<main>
+<!-- todo content -->
 </main>
 <footer>
 	<p>Автор сайта: <b>Тугушев Тимур</b><br>

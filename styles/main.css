@@ -170,12 +170,7 @@ button {
 	transition: 0.3s;
 }
 
-button:hover {
-	color: var(--wr_background);
-	background-color: var(--wr_primary);
-}
-
-button:focus {
+button:hover, button:focus {
 	color: var(--wr_background);
 	background-color: var(--wr_primary);
 	outline: none;
@@ -190,7 +185,82 @@ button:disabled:hover {
 	background-color: transparent;
 }
 
+button.no_style {
+	border: none;
+}
+
+/* Set style for button-like links */
+a.button {
+	display: block;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: medium;
+	border-radius: 0;
+	border: none;
+	color: var(--wr_text);
+	background-color: transparent;
+	padding: 0.75em 1em;
+	transition: 0.3s;
+	cursor: pointer;
+	user-select: none;
+}
+
+a.button:hover, a.button:focus {
+	background-color: var(--wr_primary);
+	outline: none;
+}
+
+/* Set design of dropdown menu */
+ul.menu {
+	display: block;
+	position: relative;
+}
+
+ul.dropdown {
+	display: none;
+	position: absolute;
+	right: 0;
+	z-index: 1;
+}
+
+ul.dropdown * {
+	display: block;
+	min-width: 100%;
+	width: max-content;
+	text-decoration: none;
+}
+
+ul.dropdown a {
+	background-color: var(--wr_header);
+	color: var(--wr_text);
+	padding: 0.75em 1em;
+	transition: 0.3s;
+}
+
+ul.dropdown a:hover {
+	background-color: var(--wr_primary);
+}
+
+ul.dropdown a:focus {
+	background-color: var(--wr_primary);
+	outline: none;
+}
+
+ul.menu > li:hover > ul.dropdown {
+	display: block;
+}
+
+ul.menu > li:focus-within > ul.dropdown {
+	display: block;
+}
+
 /* Additional attributes */
+.center_vertically_parent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .center_parent {
 	padding: 1em;
 	display: flex;
@@ -241,6 +311,30 @@ ul.no_style {
 .horizontal_scroll {
 	overflow-x: auto;
 	overflow-y: hidden;
+}
+
+.large_font {
+	font-size: large;
+}
+
+.medium_font {
+	font-size: medium;
+}
+
+.margin_05 {
+	margin: 0.5em;
+}
+
+.margin_05_vert {
+	margin: 0.5em 0;
+}
+
+.margin_0 {
+	margin: 0;
+}
+
+.margin_1_right {
+	margin-right: 1em;
 }
 
 /* Set scrollbar behaviour for webkit browsers */
