@@ -56,7 +56,9 @@ $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гос�
 	} else {
 	?>
 	<nav role='navigation' class='float_right'>
-		<a href='account.php' class='button padding_1p275'>Личный кабинет</a>
+		<a href='account.php' class='button padding_1p275'>
+			<span class='fa fa-user-circle margin_0p5_right'></span>Личный кабинет
+		</a>
 	</nav>
 	<?php
 	}
