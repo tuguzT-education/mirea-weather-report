@@ -69,7 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 	<meta name='author' content='Тугушев Тимур'>
 	<meta name='color-scheme' content='dark light'>
 	<meta name='keywords' content='weather, погода, прогноз погоды'>
-	<link href='styles/main.css' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' href='styles/main.css' type='text/css'>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<title>Вход | Weather Report</title>
 </head>
 <body>
@@ -85,32 +86,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 			<li>
 				<form method='post'>
 					<div class='center_parent'>
-                        <?php
-                        $email_input->show();
-                        ?>
+						<?php
+						$email_input->show();
+						?>
 					</div>
 					<div class='center_parent'>
                         <?php
                         $password_input->show();
                         ?>
 					</div>
-                    <?php
-                    if (isset($error_message)) {
-                    ?>
-                        <div class='center_parent text_center error'>
-                            <p><?php echo htmlentities($error_message); ?></p>
-                        </div>
-                    <?php
+					<?php
+					if (isset($error_message)) {
+					?>
+						<div class='center_parent text_center error'>
+							<p><?= htmlentities($error_message) ?></p>
+						</div>
+					<?php
                     }
                     ?>
 					<div class='center_parent'>
-						<button type='submit' id='login' name='login'>Войти</button>
+						<button type='submit' id='login' name='login'>
+							<span class='fa fa-sign-in margin_0p5_right'></span>Войти
+						</button>
 					</div>
 				</form>
 			</li>
-            <li class='text_center'>
-                <p>Нет аккаунта? <a href='register.php'>Зарегистрироваться</a></p>
-            </li>
+			<li class='text_center'>
+				<p>Нет аккаунта? <a href='register.php'>Зарегистрироваться</a></p>
+				<p>Также можно <a href='account.php'>войти как гость</a></p>
+			</li>
 		</ul>
 	</div>
 </main>

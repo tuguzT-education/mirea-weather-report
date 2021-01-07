@@ -190,7 +190,7 @@ button.no_style {
 }
 
 /* Set style for button-like links */
-a.button {
+.button {
 	display: block;
 	text-decoration: none;
 	font-weight: bold;
@@ -199,13 +199,13 @@ a.button {
 	border: none;
 	color: var(--wr_text);
 	background-color: transparent;
-	padding: 0.75em 1em;
 	transition: 0.3s;
 	cursor: pointer;
 	user-select: none;
 }
 
-a.button:hover, a.button:focus {
+.button:hover, .button:focus {
+	color: var(--wr_text);
 	background-color: var(--wr_primary);
 	outline: none;
 }
@@ -224,16 +224,22 @@ ul.dropdown {
 }
 
 ul.dropdown * {
-	display: block;
+	display: inline-block;
 	min-width: 100%;
 	width: max-content;
 	text-decoration: none;
 }
 
+ul.dropdown span {
+	display: initial;
+	min-width: initial;
+	width: initial;
+	text-decoration: initial;
+}
+
 ul.dropdown a {
 	background-color: var(--wr_header);
 	color: var(--wr_text);
-	padding: 0.75em 1em;
 	transition: 0.3s;
 }
 
@@ -269,7 +275,7 @@ ul.menu > li:focus-within > ul.dropdown {
 }
 
 ul.no_style {
-	padding: 0;
+	padding-left: 0;
 	list-style: none;
 }
 
@@ -321,11 +327,19 @@ ul.no_style {
 	font-size: medium;
 }
 
-.margin_05 {
+.margin_0p5 {
 	margin: 0.5em;
 }
 
-.margin_05_vert {
+.margin_0p5_left {
+	margin-left: 0.5em;
+}
+
+.margin_0p5_right {
+	margin-right: 0.5em;
+}
+
+.margin_0p5_vert {
 	margin: 0.5em 0;
 }
 
@@ -335,6 +349,26 @@ ul.no_style {
 
 .margin_1_right {
 	margin-right: 1em;
+}
+
+.padding_0p5 {
+	padding: 0.5em;
+}
+
+.padding_0p5_vert {
+	padding: 0.5em 0;
+}
+
+.padding_1 {
+	padding: 1em;
+}
+
+.padding_0 {
+	padding: 0;
+}
+
+.padding_1p275 {
+	padding: 1.275em;
 }
 
 /* Set scrollbar behaviour for webkit browsers */
