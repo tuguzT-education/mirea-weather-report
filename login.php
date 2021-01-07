@@ -4,6 +4,7 @@ require_once 'classes/Database.php';
 require_once 'classes/InputText.php';
 require_once 'defines/patterns.php';
 require_once 'defines/functions.php';
+require_once 'defines/templates.php';
 
 use WeatherReport\Database;
 use WeatherReport\InputText;
@@ -62,26 +63,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 ?>
 <!DOCTYPE html>
 <html lang='ru'>
-<head>
-	<meta charset='UTF-8'>
-	<meta name='viewport' content='width=device-width, initial-scale=1'>
-	<meta name='description' content='Прогноз погоды из любой точки земного шара'>
-	<meta name='author' content='Тугушев Тимур'>
-	<meta name='color-scheme' content='dark light'>
-	<meta name='keywords' content='weather, погода, прогноз погоды'>
-	<link rel='stylesheet' href='styles/main.css' type='text/css'>
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-	<title>Вход | Weather Report</title>
-</head>
+<?php
+headHTML('Авторизация');
+?>
 <body>
-<header>
-	<h3>Weather Report</h3>
-</header>
+<?php
+simpleHeaderHTML();
+?>
 <main class='center_parent'>
 	<div class='center_parent panel input_form'>
 		<ul class='no_style'>
 			<li class='text_center'>
-				<h3>Авторизация</h3>
+				<h2>Авторизация</h2>
 			</li>
 			<li>
 				<form method='post'>
@@ -98,9 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 					<?php
 					if (isset($error_message)) {
 					?>
-						<div class='center_parent text_center error'>
-							<p><?= htmlentities($error_message) ?></p>
-						</div>
+					<div class='center_parent text_center error'>
+						<p><?= htmlentities($error_message) ?></p>
+					</div>
 					<?php
                     }
                     ?>

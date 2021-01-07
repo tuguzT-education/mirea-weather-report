@@ -18,7 +18,7 @@
 	--wr_text: var(--wr_darker_gray);
 	--wr_background: white;
 	--wr_header: var(--wr_blue);
-	--wr_autofill_background: var(--wr_blue);
+	--wr_autofill_background: var(--wr_light_blue_plus);
 	--wr_panel: var(--wr_light_blue);
 
 	--wr_primary: var(--wr_dark_blue);
@@ -79,6 +79,7 @@ main {
 
 a {
 	color: var(--wr_primary);
+	font-weight: bold;
 }
 
 a:focus {
@@ -162,6 +163,7 @@ button {
 	cursor: pointer;
 	user-select: none;
 	font-weight: bold;
+	font-size: 1em;
 	color: var(--wr_text);
 	background-color: transparent;
 	border: 0.15em solid var(--wr_primary);
@@ -210,7 +212,7 @@ button.no_style {
 	outline: none;
 }
 
-/* Set design of dropdown menu */
+/* Set design of header menu with dropdown labels */
 ul.menu {
 	display: block;
 	position: relative;
@@ -307,6 +309,14 @@ ul.no_style {
 
 .good {
 	color: var(--wr_green_tea) !important;
+}
+
+.inline_block {
+	display: inline-block;
+}
+
+.flex {
+	display: flex;
 }
 
 .vertical_scroll {

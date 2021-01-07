@@ -9,7 +9,7 @@ session_start();
 <!DOCTYPE html>
 <html lang='ru'>
 <?php
-headHTML('Погода');
+headHTML('Карта');
 ?>
 <body>
 <?php
