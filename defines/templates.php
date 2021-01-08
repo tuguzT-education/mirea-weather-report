@@ -9,6 +9,8 @@ function headHTML(string $title): void {
 	<meta name='author' content='Тугушев Тимур'>
 	<meta name='color-scheme' content='dark light'>
 	<meta name='keywords' content='weather, погода, прогноз погоды'>
+	<link rel='icon' href='/images/favicon.svg' type='image/svg+xml'>
+	<link rel='mask-icon' href='/images/favicon_safari.svg'>
 	<link rel='stylesheet' href='/styles/main.css' type='text/css'>
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<title><?= $title ?> | Weather Report</title>
