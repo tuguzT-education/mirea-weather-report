@@ -10,7 +10,7 @@
 	--wr_light_gray: rgb(191, 199, 214);
 	--wr_gray: rgb(85, 94, 110);
 	--wr_dark_gray: rgb(54, 60, 71);
-	--wr_darker_gray: rgb(32, 38, 48);
+	--wr_darker_gray: rgb(29, 35, 43);
 	--wr_dark_gray_plus: rgb(3, 10, 23);
 	--wr_tomato: rgb(255, 103, 70);
 	--wr_green_tea: rgb(132, 178, 0);
@@ -18,20 +18,25 @@
 	--wr_text: var(--wr_darker_gray);
 	--wr_background: white;
 	--wr_header: var(--wr_blue);
-	--wr_autofill_background: var(--wr_light_blue_plus);
+	--wr_autofill_background: rgb(223, 232, 255);
 	--wr_panel: var(--wr_light_blue);
+	--wr_table_row: rgb(221, 231, 255);
 
 	--wr_primary: var(--wr_dark_blue);
+
+	--wr_radius: 0.25em;
+	--wr_transition_duration: 0.15s;
 }
 
 /* Override some colors for dark theme */
 @media (prefers-color-scheme: dark) {
 	:root {
 		--wr_text: var(--wr_light_blue_plus);
-		--wr_background: #121212;
-		--wr_header: var(--wr_darker_gray);
+		--wr_background: #0e0e0e;
+		--wr_header: #181b1f;
 		--wr_autofill_background: var(--wr_dark_gray);
 		--wr_panel: var(--wr_darker_gray);
+		--wr_table_row: #2a2f37;
 	}
 }
 
@@ -78,11 +83,17 @@ main {
 }
 
 a {
+	text-decoration: none;
 	color: var(--wr_primary);
 	font-weight: bold;
 }
 
+a:hover {
+	text-decoration: underline;
+}
+
 a:focus {
+	text-decoration: underline;
 	color: var(--wr_tomato);
 }
 
@@ -107,7 +118,7 @@ input {
 	min-width: 30vw;
 	width: 100%;
 	max-width: 70vw;
-	transition: 0.3s;
+	transition: var(--wr_transition_duration);
 }
 
 input::placeholder {
@@ -126,7 +137,7 @@ input + label {
 	position: absolute;
 	top: 0.4em;
 	left: 0.4em;
-	transition: 0.3s;
+	transition: var(--wr_transition_duration);
 }
 
 input:focus + label {
@@ -169,7 +180,7 @@ button {
 	border: 0.15em solid var(--wr_primary);
 	border-radius: 0;
 	padding: 0.75em 1em;
-	transition: 0.3s;
+	transition: var(--wr_transition_duration);
 }
 
 button:hover, button:focus {
@@ -201,12 +212,13 @@ button.no_style {
 	border: none;
 	color: var(--wr_text);
 	background-color: transparent;
-	transition: 0.3s;
+	transition: var(--wr_transition_duration);
 	cursor: pointer;
 	user-select: none;
 }
 
 .button:hover, .button:focus {
+	text-decoration: none;
 	color: var(--wr_text);
 	background-color: var(--wr_primary);
 	outline: none;
@@ -242,7 +254,7 @@ ul.dropdown span {
 ul.dropdown a {
 	background-color: var(--wr_header);
 	color: var(--wr_text);
-	transition: 0.3s;
+	transition: var(--wr_transition_duration);
 }
 
 ul.dropdown a:hover {
@@ -260,6 +272,41 @@ ul.menu > li:hover > ul.dropdown {
 
 ul.menu > li:focus-within > ul.dropdown {
 	display: block;
+}
+
+/* Set style of table */
+table {
+	border-collapse: collapse;
+}
+
+caption {
+	padding: 0.75em;
+	background-color: var(--wr_header);
+	border-radius: var(--wr_radius) var(--wr_radius) 0 0;
+	font-size: larger;
+	text-align: left;
+	font-weight: bold;
+}
+
+th {
+	background-color: var(--wr_panel);
+	border-bottom: 0.15em solid var(--wr_text);
+	padding: 0.5em;
+	text-align: left;
+}
+
+td {
+	padding: 0.5em;
+	text-align: left;
+	transition: var(--wr_transition_duration);
+}
+
+tr {
+	background-color: var(--wr_table_row);
+}
+
+tr:hover > td {
+	background-color: var(--wr_panel);
 }
 
 /* Additional attributes */
@@ -284,7 +331,7 @@ ul.no_style {
 .panel {
 	background: var(--wr_panel);
 	border: none;
-	border-radius: 0.5em;
+	border-radius: var(--wr_radius);
 }
 
 .panel.input_form {
@@ -317,6 +364,14 @@ ul.no_style {
 
 .flex {
 	display: flex;
+}
+
+.block {
+	display: block;
+}
+
+.full_width {
+	width: 100%;
 }
 
 .vertical_scroll {
@@ -353,8 +408,20 @@ ul.no_style {
 	margin: 0.5em 0;
 }
 
+.margin_0p5_bottom {
+	margin-bottom: 0.5em;
+}
+
+.margin_1_vert {
+	margin: 1em 0;
+}
+
 .margin_0 {
 	margin: 0;
+}
+
+.margin_1 {
+	margin: 1em;
 }
 
 .margin_1_right {
