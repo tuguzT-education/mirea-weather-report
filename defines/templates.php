@@ -31,7 +31,7 @@ function footerHTML(): void {
 function simpleHeaderHTML(): void {
 ?>
 <header>
-	<h3>Weather Report</h3>
+	<h3 class='favicon'>Weather Report</h3>
 </header>
 <?php
 }
@@ -39,7 +39,7 @@ function simpleHeaderHTML(): void {
 function userHeaderHTML(): void {
 ?>
 <header>
-	<h3 class='float_left margin_1_right'>Weather Report</h3>
+	<h3 class='float_left margin_1_right favicon'>Weather Report</h3>
 	<nav role='navigation' class='float_right flex'>
 		<a href='/map.php' class='button padding_1p275'>
 			<span class='fa fa-map margin_0p5_right'></span>Карта
@@ -59,12 +59,12 @@ function userHeaderHTML(): void {
 					</a>
 					<ul class='no_style dropdown'>
 						<li>
-							<a href='/account.php' class='padding_1p275'>
+							<a href='/account.php' class='button padding_1p275'>
 								<span class='fa fa-home margin_0p5_right'></span>Личный кабинет
 							</a>
 						</li>
 						<li>
-							<a href='/logout.php' class='padding_1p275'>
+							<a href='/logout.php' class='button padding_1p275'>
 								<span class='fa fa-sign-out margin_0p5_right'></span>Выйти
 							</a>
 						</li>

@@ -184,7 +184,7 @@ button {
 }
 
 button:hover, button:focus {
-	color: var(--wr_background);
+	color: var(--wr_light_blue_plus);
 	background-color: var(--wr_primary);
 	outline: none;
 }
@@ -219,7 +219,7 @@ button.no_style {
 
 .button:hover, .button:focus {
 	text-decoration: none;
-	color: var(--wr_text);
+	color: var(--wr_light_blue_plus);
 	background-color: var(--wr_primary);
 	outline: none;
 }
@@ -253,17 +253,6 @@ ul.dropdown span {
 
 ul.dropdown a {
 	background-color: var(--wr_header);
-	color: var(--wr_text);
-	transition: var(--wr_transition_duration);
-}
-
-ul.dropdown a:hover {
-	background-color: var(--wr_primary);
-}
-
-ul.dropdown a:focus {
-	background-color: var(--wr_primary);
-	outline: none;
 }
 
 ul.menu > li:hover > ul.dropdown {
@@ -291,12 +280,12 @@ caption {
 th {
 	background-color: var(--wr_panel);
 	border-bottom: 0.15em solid var(--wr_text);
-	padding: 0.5em;
+	padding: 0.5em 0.75em;
 	text-align: left;
 }
 
 td {
-	padding: 0.5em;
+	padding: 0.5em 0.75em;
 	text-align: left;
 	transition: var(--wr_transition_duration);
 }
@@ -310,6 +299,18 @@ tr:hover > td {
 }
 
 /* Additional attributes */
+.favicon:before {
+	content: '';
+	display: inline-block;
+	height: 1.3em;
+	width: 1.3em;
+	margin: 0 0.5em -0.3em 0;
+	padding: 0;
+	background-image: url(/images/favicon.svg);
+	background-size: 1.3em;
+	background-repeat: no-repeat;
+}
+
 .center_vertically_parent {
 	display: flex;
 	flex-direction: column;
