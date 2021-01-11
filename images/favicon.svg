@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="favicon"
 	 viewBox="0 0 512 512" width="512" height="512">
-	<path fill="rgb(180, 200, 255)"
+	<path fill="#b4c8ff"
 		  d="M510 160v350H0V160h127.4v15h303.2v-15z"/>
-	<path fill="rgb(90, 150, 255)"
+	<path fill="#5a96ff"
 		  d="M510 160v350H279V175h151.6v-15zM241 510h-34.6l-88-152H0v-30h121.4l52.9-46.3 19.8 22.6-48 41.9z"/>
-	<path fill="rgb(0, 100, 255)"
+	<path fill="#0064ff"
 		  d="M400 510h-30.2l-25.7-197 29.8-4z"/>
-	<path fill="rgb(60, 170, 255)"
+	<path fill="#3caaff"
 		  d="M446 167c0 77.8-112.4 205.5-167 261.5-54.6-56-167-183.6-167-261.5C112 75 187 0 279 0s167 75 167 167z"/>
-	<path fill="rgb(57, 120, 255)"
+	<path fill="#3978ff"
 		  d="M446 167c0 77.8-112.4 205.5-167 261.5V0c92 0 167 75 167 167z"/>
 	<g>
 		<path fill="#fc0"

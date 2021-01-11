@@ -52,11 +52,11 @@ function userHeaderHTML(): void {
 		?>
 			<ul class='no_style menu margin_0 padding_0'>
 				<li>
-					<a href='#' class='button padding_1p275'>
+					<button class='button padding_1p275'>
 						<span class='fa fa-user-circle margin_0p5_right'></span>
-						<?= "{$_SESSION['name']} {$_SESSION['surname']}" ?>
+						<span><?= "{$_SESSION['name']} {$_SESSION['surname']}" ?></span>
 						<span class='fa fa-angle-down margin_0p5_left'></span>
-					</a>
+					</button>
 					<ul class='no_style dropdown'>
 						<li>
 							<a href='/account.php' class='button padding_1p275'>

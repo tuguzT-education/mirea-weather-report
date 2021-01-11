@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 <!DOCTYPE html>
 <html lang='ru'>
 <?php
-headHTML('Авторизация');
+headHTML('Вход');
 ?>
 <body>
 <?php
@@ -74,7 +74,7 @@ simpleHeaderHTML();
 	<div class='center_parent panel input_form'>
 		<ul class='no_style'>
 			<li class='text_center'>
-				<h2>Авторизация</h2>
+				<h2>Вход</h2>
 			</li>
 			<li>
 				<form method='post'>

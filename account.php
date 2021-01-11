@@ -1,47 +1,13 @@
 <?php
 
-require_once 'classes/Database.php';
 require_once 'defines/functions.php';
 require_once 'defines/templates.php';
-
-use WeatherReport\Database;
 
 session_start();
 
 $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гость';
 
-if (loggedIn()) {
-	try {
-		$database = Database::connect();
-		$database->setDatabase('userdata');
-
-		$database->query('
-			CREATE TABLE IF NOT EXISTS `locations` (
-				`name` VARCHAR(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-				`email` VARCHAR(320) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-				`latitude` DECIMAL(10, 8) NOT NULL,
-				`longitude` DECIMAL(11, 8) NOT NULL,
-				FOREIGN KEY (`email`) REFERENCES `general`(`email`)
-			) ENGINE=MyISAM;'
-		);
-
-		$query = 'SELECT `name`, `latitude`, `longitude` FROM `locations` WHERE `email` = ?';
-		$result = $database->query($query, $_SESSION['email']);
-		if ($result->num_rows === 0) {
-			throw new Exception('Список местоположений пуст!', -1);
-		}
-
-		while ($row = $result->fetch_assoc()) {
-			$data[] = $row;
-		}
-	} catch (Exception $exception) {
-		if ($exception->getCode() === -1) {
-			$error_message = $exception->getMessage();
-		} else {
-			$error_message = "Внутренняя ошибка №{$exception->getCode()}: \"{$exception->getMessage()}\"";
-		}
-	}
-}
+include 'get_locations.php';
 
 ?>
 <!DOCTYPE html>
@@ -50,6 +16,38 @@ if (loggedIn()) {
 headHTML($fullName);
 ?>
 <body>
+<div class='dialog_background' id='add_location'>
+	<div class='dialog'>
+		<h3>Добавить местоположение</h3>
+		<form action='add_location.php' method='post'>
+			<!-- todo -->
+			<button type='submit' class='margin_0p5_bottom'>
+				<span class='fa fa-plus margin_0p5_right'></span>
+				<span>Добавить</span>
+			</button>
+		</form>
+		<a class='button border' href='account.php'>
+			<span class='fa fa-close margin_0p5_right'></span>
+			<span>Отмена</span>
+		</a>
+	</div>
+</div>
+<div class='dialog_background' id='remove_location'>
+	<div class='dialog'>
+		<h3>Удалить местоположение</h3>
+		<form action='remove_location.php' method='post'>
+			<!-- todo -->
+			<button type='submit' class='margin_0p5_bottom'>
+				<span class='fa fa-trash margin_0p5_right'></span>
+				<span>Удалить</span>
+			</button>
+		</form>
+		<a class='button border' href='account.php'>
+			<span class='fa fa-close margin_0p5_right'></span>
+			<span>Отмена</span>
+		</a>
+	</div>
+</div>
 <?php
 userHeaderHTML();
 
@@ -64,21 +62,25 @@ if (loggedIn()) {
 			<span>Email пользователя: <a href='mailto:<?= $_SESSION['email'] ?>'><?= $_SESSION['email'] ?></a></span>
 		</div>
 		<div>
-			<button class='block margin_0p5_bottom'>
-				<span class='fa fa-plus margin_0p5_right'></span>Добавить местоположение</button>
-			<button>
-				<span class='fa fa-trash margin_0p5_right'></span>Удалить местоположение</button>
+			<a class='button border margin_0p5_bottom' href='#add_location'>
+				<span class='fa fa-plus margin_0p5_right'></span>
+				<span>Добавить местоположение</span>
+			</a>
+			<a class='button border margin_0p5_bottom' href='#remove_location'>
+				<span class='fa fa-trash margin_0p5_right'></span>
+				<span>Удалить местоположение</span>
+			</a>
 		</div>
 	</div>
 	<div class='padding_1' style='flex: 2'>
 		<?php
-		if (isset($error_message)) {
+		if (isset($_SESSION['error'])) {
 		?>
 		<div class='center_parent text_center error'>
-			<p><?= htmlentities($error_message) ?></p>
+			<p><?= htmlentities($_SESSION['error']); unset($_SESSION['error']); ?></p>
 		</div>
 		<?php
-		} elseif (isset($data)) {
+		} elseif (isset($_SESSION['locations'])) {
 		?>
 		<table class='full_width'>
 			<caption>Сохраненные местоположения</caption>
@@ -88,7 +90,7 @@ if (loggedIn()) {
 				<th>Долгота</th>
 			</tr>
 			<?php
-			foreach ($data as $row) {
+			foreach ($_SESSION['locations'] as $row) {
 			?>
 			<tr>
 				<td><?= $row['name'] ?></td>
@@ -103,6 +105,7 @@ if (loggedIn()) {
 		}
 		?>
 	</div>
+</main>
 <?php
 } else {
 ?>
@@ -114,11 +117,9 @@ if (loggedIn()) {
 			</span>
 		</p>
 	</div>
-	<?php
-	}
-	?>
 </main>
 <?php
+}
 footerHTML();
 ?>
 </body>
