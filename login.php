@@ -105,8 +105,8 @@ simpleHeaderHTML();
 				</form>
 			</li>
 			<li class='text_center'>
-				<p>Нет аккаунта? <a href='register.php'>Зарегистрироваться</a></p>
-				<p>Также можно <a href='account.php'>войти как гость</a></p>
+				<p>Нет аккаунта? <a href='/register.php'>Зарегистрироваться</a></p>
+				<p>Также можно <a href='/account.php'>войти как гость</a></p>
 			</li>
 		</ul>
 	</div>

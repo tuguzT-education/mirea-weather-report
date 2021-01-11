@@ -64,7 +64,7 @@ function userHeaderHTML(): void {
 							</a>
 						</li>
 						<li>
-							<a href='/logout.php' class='button padding_1p275'>
+							<a href='/scripts/logout.php' class='button padding_1p275'>
 								<span class='fa fa-sign-out margin_0p5_right'></span>Выйти
 							</a>
 						</li>

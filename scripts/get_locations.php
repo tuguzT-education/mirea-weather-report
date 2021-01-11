@@ -1,7 +1,7 @@
 <?php
 
-require_once 'classes/Database.php';
-require_once 'defines/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/functions.php';
 
 use WeatherReport\Database;
 
@@ -9,7 +9,9 @@ if (session_status() === PHP_SESSION_NONE) {
 	session_start();
 }
 
-if (loggedIn() && !isset($_SESSION['locations'])) try {
+if (loggedIn()) try {
+	$_SESSION['locations'] = array();
+
 	$database = Database::connect();
 	$database->setDatabase('userdata');
 

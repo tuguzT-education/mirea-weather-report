@@ -157,7 +157,7 @@ simpleHeaderHTML();
 				</form>
 			</li>
 			<li class='text_center'>
-				<p>Уже есть аккаунт? <a href='login.php'>Войти</a></p>
+				<p>Уже есть аккаунт? <a href='/login.php'>Войти</a></p>
 			</li>
 		</ul>
 	</div>

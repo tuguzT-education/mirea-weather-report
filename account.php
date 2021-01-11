@@ -7,7 +7,7 @@ session_start();
 
 $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гость';
 
-include 'get_locations.php';
+include 'scripts/get_locations.php';
 
 ?>
 <!DOCTYPE html>
@@ -16,17 +16,22 @@ include 'get_locations.php';
 headHTML($fullName);
 ?>
 <body>
+<?php
+userHeaderHTML();
+
+if (loggedIn()) {
+?>
 <div class='dialog_background' id='add_location'>
 	<div class='dialog'>
 		<h3>Добавить местоположение</h3>
-		<form action='add_location.php' method='post'>
+		<form action='/scripts/add_location.php' method='post'>
 			<!-- todo -->
 			<button type='submit' class='margin_0p5_bottom'>
 				<span class='fa fa-plus margin_0p5_right'></span>
 				<span>Добавить</span>
 			</button>
 		</form>
-		<a class='button border' href='account.php'>
+		<a class='button border' href='/account.php'>
 			<span class='fa fa-close margin_0p5_right'></span>
 			<span>Отмена</span>
 		</a>
@@ -35,24 +40,30 @@ headHTML($fullName);
 <div class='dialog_background' id='remove_location'>
 	<div class='dialog'>
 		<h3>Удалить местоположение</h3>
-		<form action='remove_location.php' method='post'>
-			<!-- todo -->
-			<button type='submit' class='margin_0p5_bottom'>
+		<form action='/scripts/remove_location.php' method='post'>
+			<label class='center_parent'>
+				<select name='remove_location_name'>
+				<?php
+				if (isset($_SESSION['locations'])) {
+					foreach ($_SESSION['locations'] as $row) {
+						echo "<option>{$row['name']}</option>";
+					}
+				}
+				?>
+				</select>
+			</label>
+			<button type='submit' class='margin_0p5_bottom' name='remove_location'
+				<?php if (empty($_SESSION['locations'])) echo ' disabled'; ?>>
 				<span class='fa fa-trash margin_0p5_right'></span>
 				<span>Удалить</span>
 			</button>
 		</form>
-		<a class='button border' href='account.php'>
+		<a class='button border' href='/account.php'>
 			<span class='fa fa-close margin_0p5_right'></span>
 			<span>Отмена</span>
 		</a>
 	</div>
 </div>
-<?php
-userHeaderHTML();
-
-if (loggedIn()) {
-?>
 <main class='flex'>
 	<div style='flex: 1'>
 		<div class='panel padding_1 margin_1_vert'>
@@ -66,10 +77,16 @@ if (loggedIn()) {
 				<span class='fa fa-plus margin_0p5_right'></span>
 				<span>Добавить местоположение</span>
 			</a>
+			<?php
+			if (!empty($_SESSION['locations'])) {
+			?>
 			<a class='button border margin_0p5_bottom' href='#remove_location'>
 				<span class='fa fa-trash margin_0p5_right'></span>
 				<span>Удалить местоположение</span>
 			</a>
+			<?php
+			}
+			?>
 		</div>
 	</div>
 	<div class='padding_1' style='flex: 2'>
@@ -113,13 +130,14 @@ if (loggedIn()) {
 	<div class='center_parent text_center'>
 		<p class='error'>Вы вошли как <b>гость</b>, поэтому функции обычного пользователя вам недоступны!<br>
 			<span class='good'>
-				<a href='login.php'>Войти</a> либо <a href='register.php'>зарегистрироваться</a>
+				<a href='/login.php'>Войти</a> либо <a href='/register.php'>зарегистрироваться</a>
 			</span>
 		</p>
 	</div>
 </main>
 <?php
 }
+
 footerHTML();
 ?>
 </body>

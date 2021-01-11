@@ -1,7 +1,7 @@
 <?php
 
-require_once 'classes/Database.php';
-require_once 'defines/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/functions.php';
 
 use WeatherReport\Database;
 
