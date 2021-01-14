@@ -17,10 +17,11 @@ if (loggedIn()) try {
 
 	$database->query('
 		CREATE TABLE IF NOT EXISTS `locations` (
-			`name` VARCHAR(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+			`name` VARCHAR(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
 			`email` VARCHAR(320) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
 			`latitude` DECIMAL(10, 8) NOT NULL,
 			`longitude` DECIMAL(11, 8) NOT NULL,
+			UNIQUE (`name`),
 			FOREIGN KEY (`email`) REFERENCES `general`(`email`)
 		) ENGINE=MyISAM;'
 	);

@@ -1,13 +1,45 @@
 <?php
 
+require_once 'classes/InputText.php';
+require_once 'defines/patterns.php';
 require_once 'defines/functions.php';
 require_once 'defines/templates.php';
+
+use WeatherReport\InputText;
 
 session_start();
 
 $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гость';
 
-include 'scripts/get_locations.php';
+if (loggedIn()) {
+	if (!isset($_SESSION['name_input'])) {
+		$name_input = new InputText(
+			InputText\Type::TEXT(), 'add_location_name', 'Название',
+			'Введите название добавляемого местоположения', 250
+		);
+		$_SESSION['name_input'] = serialize($name_input);
+	}
+	if (!isset($_SESSION['latitude_input'])) {
+		$latitude_input = new InputText(
+			InputText\Type::TEXT(), 'add_location_latitude', 'Широта',
+			'Введите широту добавляемого местоположения', 10,
+			NUMBER_REGEX_HTML
+		);
+		$_SESSION['latitude_input'] = serialize($latitude_input);
+	}
+	if (!isset($_SESSION['longitude_input'])) {
+		$longitude_input = new InputText(
+			InputText\Type::TEXT(), 'add_location_longitude', 'Долгота',
+			'Введите долготу добавляемого местоположения', 11,
+			NUMBER_REGEX_HTML
+		);
+		$_SESSION['longitude_input'] = serialize($longitude_input);
+	}
+
+	if (!isset($_SESSION['error'])) {
+		include 'scripts/get_locations.php';
+	}
+}
 
 ?>
 <!DOCTYPE html>
@@ -24,13 +56,39 @@ if (loggedIn()) {
 <div class='dialog_background' id='add_location'>
 	<div class='dialog'>
 		<h3>Добавить местоположение</h3>
-		<form action='/scripts/add_location.php' method='post'>
-			<!-- todo -->
-			<button type='submit' class='margin_0p5_bottom'>
-				<span class='fa fa-plus margin_0p5_right'></span>
-				<span>Добавить</span>
-			</button>
-		</form>
+		<div class='tabs'>
+			<input type='radio' name='tab' id='tab_1' hidden aria-hidden='true' checked>
+			<input type='radio' name='tab' id='tab_2' hidden aria-hidden='true'>
+			<ul hidden aria-hidden='true'>
+				<li><label for='tab_1'>По координатам</label></li>
+				<li><label for='tab_2'>По адресу</label></li>
+			</ul>
+			<div class='margin_1_bottom'>
+				<section>
+					<form action='/scripts/add_location.php' method='post'>
+						<?php
+						function showInput(string $id): void {
+							$input = unserialize($_SESSION[$id]);
+							$input->show();
+							$input->setErrorMessage('');
+							$_SESSION[$id] = serialize($input);
+						}
+
+						showInput('name_input');
+						showInput('latitude_input');
+						showInput('longitude_input');
+						?>
+						<button type='submit' class='margin_2_top' name='add_location'>
+							<span class='fa fa-plus margin_0p5_right'></span>
+							<span>Добавить</span>
+						</button>
+					</form>
+				</section>
+				<section>
+					<h3>BRUH MOMENT</h3>
+				</section>
+			</div>
+		</div>
 		<a class='button border' href='/account.php'>
 			<span class='fa fa-close margin_0p5_right'></span>
 			<span>Отмена</span>
@@ -46,7 +104,7 @@ if (loggedIn()) {
 				<?php
 				if (isset($_SESSION['locations'])) {
 					foreach ($_SESSION['locations'] as $row) {
-						echo "<option>{$row['name']}</option>";
+						?><option><?= $row['name'] ?></option><?php
 					}
 				}
 				?>

@@ -54,5 +54,29 @@ namespace WeatherReport {
 			}
 			echo '</div>';
 		}
+
+		public function __serialize(): array {
+			return [
+				'type' => \serialize($this->type),
+				'name' => $this->name,
+				'placeholder' => $this->placeholder,
+				'title' => $this->title,
+				'pattern' => $this->pattern,
+				'value' => $this->value,
+				'error_message' => $this->error_message,
+				'maxlength' => $this->maxlength,
+			];
+		}
+
+		public function __unserialize(array $data): void {
+			$this->type = \unserialize($data['type']);
+			$this->name = $data['name'];
+			$this->placeholder = $data['placeholder'];
+			$this->title = $data['title'];
+			$this->pattern = $data['pattern'];
+			$this->value = $data['value'];
+			$this->error_message = $data['error_message'];
+			$this->maxlength = $data['maxlength'];
+		}
 	}
 }
