@@ -19,7 +19,7 @@ try {
 		inputError('Адрес не может быть пустым!', 'address_input');
 	}
 	$url = 'https://geocode.search.hereapi.com/v1/geocode?q=' .
-		urlencode($address) . '&apiKey=' . HERE_REST_API_KEY;
+		urlencode($address) . '&lang=ru-RU&apiKey=' . HERE_REST_API_KEY;
 
 	$curl = curl_init();
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -34,7 +34,8 @@ try {
 	$data_geocoding = json_decode($result);
 	$_SESSION['data_geocoding'] = serialize($data_geocoding);
 	if (empty($data_geocoding->items)) {
-		inputError('Нет вариантов по данному адресу!', 'address_input');
+		$_SESSION['add_location_tab'] = 2;
+		inputError('Нет вариантов по данному адресу!', 'check_address_input');
 	}
 } catch (Exception $exception) {
 	$_SESSION['error'] = $exception->getMessage();

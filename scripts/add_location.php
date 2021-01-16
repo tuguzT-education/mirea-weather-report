@@ -74,5 +74,6 @@ try {
 			$_SESSION['error'] = "Внутренняя ошибка №{$exception->getCode()}: \"{$exception->getMessage()}\"";
 	}
 } finally {
+	$_SESSION['add_location_tab'] = 1;
 	redirect('account.php');
 }

@@ -65,11 +65,20 @@ if (loggedIn()) {
 	<div class='dialog'>
 		<h3>Добавить местоположение</h3>
 		<div class='tabs'>
-			<input type='radio' name='tab' id='tab_1' hidden aria-hidden='true' checked>
-			<input type='radio' name='tab' id='tab_2' hidden aria-hidden='true'>
+			<?php
+			$add_location_tab_id = 1;
+			if (isset($_SESSION['add_location_tab'])) {
+				$add_location_tab_id = $_SESSION['add_location_tab'];
+				$_SESSION['add_location_tab'] = 1;
+			}
+			?>
+			<input type='radio' name='add_location_tab' id='add_location_tab_1'
+				   hidden aria-hidden='true' <?php if ($add_location_tab_id === 1) echo 'checked'; ?>>
+			<input type='radio' name='add_location_tab' id='add_location_tab_2'
+				   hidden aria-hidden='true' <?php if ($add_location_tab_id === 2) echo 'checked'; ?>>
 			<ul hidden aria-hidden='true'>
-				<li><label for='tab_1'>По координатам</label></li>
-				<li><label for='tab_2'>По адресу</label></li>
+				<li><label for='add_location_tab_1'>По координатам</label></li>
+				<li><label for='add_location_tab_2'>По адресу</label></li>
 			</ul>
 			<div class='margin_1_bottom'>
 				<section>
@@ -220,8 +229,8 @@ if (loggedIn()) {
 			?>
 			<tr>
 				<td><?= $row['name'] ?></td>
-				<td><?= $row['latitude'] ?></td>
-				<td><?= $row['longitude'] ?></td>
+				<td><?= (float) $row['latitude'] ?></td>
+				<td><?= (float) $row['longitude'] ?></td>
 			</tr>
 			<?php
 			}
