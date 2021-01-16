@@ -31,3 +31,10 @@ function logout(): void {
 	session_destroy();
 	redirect('login.php');
 }
+
+function inputError(string $errorMessage, string $id) {
+	$input = unserialize($_SESSION[$id]);
+	$input->setErrorMessage($errorMessage);
+	$_SESSION[$id] = serialize($input);
+	redirect('account.php#add_location');
+}

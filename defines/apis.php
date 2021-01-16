@@ -1,0 +1,4 @@
+<?php
+
+define('OPEN_WEATHER_MAP_API_KEY', '746233f13b8578f62fe9dc1730285e03');
+define('HERE_REST_API_KEY', 'bYiCocXBuyXl4a0iQNMiKPSs2bjqlIkvPTUESlGrJ8E');

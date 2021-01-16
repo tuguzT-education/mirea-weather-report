@@ -13,31 +13,39 @@ $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гос�
 
 if (loggedIn()) {
 	if (!isset($_SESSION['name_input'])) {
-		$name_input = new InputText(
+		$input = new InputText(
 			InputText\Type::TEXT(), 'add_location_name', 'Название',
 			'Введите название добавляемого местоположения', 250
 		);
-		$_SESSION['name_input'] = serialize($name_input);
+		$_SESSION['name_input'] = serialize($input);
 	}
 	if (!isset($_SESSION['latitude_input'])) {
-		$latitude_input = new InputText(
+		$input = new InputText(
 			InputText\Type::TEXT(), 'add_location_latitude', 'Широта',
 			'Введите широту добавляемого местоположения', 10,
 			NUMBER_REGEX_HTML
 		);
-		$_SESSION['latitude_input'] = serialize($latitude_input);
+		$_SESSION['latitude_input'] = serialize($input);
 	}
 	if (!isset($_SESSION['longitude_input'])) {
-		$longitude_input = new InputText(
+		$input = new InputText(
 			InputText\Type::TEXT(), 'add_location_longitude', 'Долгота',
 			'Введите долготу добавляемого местоположения', 11,
 			NUMBER_REGEX_HTML
 		);
-		$_SESSION['longitude_input'] = serialize($longitude_input);
+		$_SESSION['longitude_input'] = serialize($input);
+	}
+
+	if (!isset($_SESSION['check_address_input'])) {
+		$input = new InputText(
+			InputText\Type::TEXT(), 'check_location_address', 'Адрес',
+			'Введите адрес местоположение', -1
+		);
+		$_SESSION['check_address_input'] = serialize($input);
 	}
 
 	if (!isset($_SESSION['error'])) {
-		include 'scripts/get_locations.php';
+		require 'scripts/get_locations.php';
 	}
 }
 
@@ -78,14 +86,22 @@ if (loggedIn()) {
 						showInput('latitude_input');
 						showInput('longitude_input');
 						?>
-						<button type='submit' class='margin_2_top' name='add_location'>
+						<button type='submit' class='margin_2_top' name='add_location_point'>
 							<span class='fa fa-plus margin_0p5_right'></span>
 							<span>Добавить</span>
 						</button>
 					</form>
 				</section>
 				<section>
-					<h3>BRUH MOMENT</h3>
+					<form action='/scripts/check_location.php' method='post'>
+						<?php
+						showInput('check_address_input');
+						?>
+						<button type='submit' class='margin_2_top' name='check_location'>
+							<span class='fa fa-plus margin_0p5_right'></span>
+							<span>Проверить адрес</span>
+						</button>
+					</form>
 				</section>
 			</div>
 		</div>
@@ -117,6 +133,41 @@ if (loggedIn()) {
 			</button>
 		</form>
 		<a class='button border' href='/account.php'>
+			<span class='fa fa-close margin_0p5_right'></span>
+			<span>Отмена</span>
+		</a>
+	</div>
+</div>
+<div class='dialog_background' id='add_checked_location'>
+	<div class='dialog'>
+		<h3>Выберите местоположение</h3>
+		<form action='/scripts/add_location.php' method='post'>
+			<?php
+			if (isset($_SESSION['data_geocoding'])) {
+				$data_geocoding = unserialize($_SESSION['data_geocoding'])->items;
+				if (!empty($data_geocoding)) {
+					?>
+			<div class='center_parent'>
+				<label>
+					<select name='add_location_selected_address'>
+						<?php
+						foreach ($data_geocoding as $item) {
+							?><option><?= $item->title ?></option><?php
+						}
+						?>
+					</select>
+				</label>
+			</div>
+			<?php
+				}
+			}
+			?>
+			<button type='submit' class='margin_2_top' name='add_location_address'>
+				<span class='fa fa-plus margin_0p5_right'></span>
+				<span>Добавить</span>
+			</button>
+		</form>
+		<a class='button border margin_2_top' href='/account.php'>
 			<span class='fa fa-close margin_0p5_right'></span>
 			<span>Отмена</span>
 		</a>
