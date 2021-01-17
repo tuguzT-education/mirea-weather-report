@@ -1,11 +1,55 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/InputText.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/apis.php';
+
+function curlExecute(string $url) {
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_URL, $url);
+	$result = curl_exec($curl);
+
+	$error = curl_error($curl);
+	curl_close($curl);
+	if ($result === false) {
+		throw new Exception("Внутренняя ошибка: \"{$error}\"");
+	}
+	return $result;
+}
+
+function getFromOpenWeatherMapAPI(string $latitude, string $longitude) {
+	$url = "https://api.openweathermap.org/data/2.5/onecall?" .
+		"exclude=alerts,minutely&lat={$latitude}&lon={$longitude}&lang=ru&" .
+		"units=metric&appid=" . OPEN_WEATHER_MAP_API_KEY;
+	$result = curlExecute($url);
+	$data_weather = json_decode($result);
+	$_SESSION['data_weather'] = serialize($data_weather);
+	return $data_weather;
+}
+
+function getFromHereAPI(string $address) {
+	$url = 'https://geocode.search.hereapi.com/v1/geocode?q=' .
+		urlencode($address) . '&lang=ru-RU&apiKey=' . HERE_REST_API_KEY;
+	$result = curlExecute($url);
+	$data_geocoding = json_decode($result);
+	$_SESSION['data_geocoding'] = serialize($data_geocoding);
+	return $data_geocoding;
+}
+
 function isValidLatitude(float $latitude): bool {
 	return -90.0 <= $latitude && $latitude < 90.0;
 }
 
 function isValidLongitude(float $longitude): bool {
 	return -180.0 < $longitude && $longitude <= 180.0;
+}
+
+function degreeToDirection(float $degrees): string {
+	$directions = array(
+		'С', 'ССЗ', 'СЗ', 'ЗСЗ', 'З', 'ЗЮЗ', 'ЮЗ', 'ЮЮЗ',
+		'Ю', 'ЮЮВ', 'ЮВ', 'ВЮВ', 'В', 'ВСВ', 'СВ', 'ССВ', 'С'
+	);
+	return $directions[round($degrees / 22.5)];
 }
 
 function redirect(string $path): void {
@@ -17,9 +61,11 @@ function redirect(string $path): void {
 
 function login(string $name, string $surname, string $email): void {
 	session_start();
-	$_SESSION['name'] = $name;
-	$_SESSION['surname'] = $surname;
-	$_SESSION['email'] = $email;
+	$_SESSION = [
+		'name' => $name,
+		'surname' => $surname,
+		'email' => $email,
+	];
 }
 
 function loggedIn() : bool {
@@ -32,9 +78,16 @@ function logout(): void {
 	redirect('login.php');
 }
 
-function inputError(string $errorMessage, string $id) {
+function inputError(string $errorMessage, string $id, string $redirectPath) {
 	$input = unserialize($_SESSION[$id]);
 	$input->setErrorMessage($errorMessage);
 	$_SESSION[$id] = serialize($input);
-	redirect('account.php#add_location');
+	redirect($redirectPath);
+}
+
+function showInput(string $id): void {
+	$input = unserialize($_SESSION[$id]);
+	$input->show();
+	$input->setErrorMessage('');
+	$_SESSION[$id] = serialize($input);
 }

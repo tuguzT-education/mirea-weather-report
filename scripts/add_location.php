@@ -19,19 +19,20 @@ try {
 	if (isset($_POST['add_location_point'])) {
 		$name = trim($_POST['add_location_name']);
 		if (empty($name)) {
-			inputError('Название не может быть пустым!', 'name_input');
+			inputError('Название не может быть пустым!',
+				'name_input', 'account.php#add_location');
 		}
 
 		$latitude = $_POST['add_location_latitude'];
 		if (!isValidLatitude($latitude)) {
 			inputError('Широта должна лежать в интервале от -90° включительно ' .
-				'до 90° невключительно!', 'latitude_input');
+				'до 90° невключительно!', 'latitude_input', 'account.php#add_location');
 		}
 
 		$longitude = $_POST['add_location_longitude'];
 		if (!isValidLongitude($longitude)) {
 			inputError('Долгота должна лежать в интервале от -180° невключительно ' .
-				'до 180° включительно!', 'longitude_input');
+				'до 180° включительно!', 'longitude_input', 'account.php#add_location');
 		}
 
 		$database = Database::connect();
@@ -65,7 +66,8 @@ try {
 			break;
 		case 1062:
 			if (isset($_POST['add_location_point'])) {
-				inputError('Местоположение с таким названием уже существует!', 'name_input');
+				inputError('Местоположение с таким названием уже существует!',
+					'name_input', 'account.php#add_location');
 			} else {
 				$_SESSION['error'] = 'Местоположение с таким названием уже существует!';
 			}

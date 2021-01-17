@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang='ru'>
+<html lang="ru">
 <?php
 headHTML('Регистрация');
 ?>
@@ -107,35 +107,35 @@ headHTML('Регистрация');
 <?php
 simpleHeaderHTML();
 ?>
-<main class='center_parent'>
-	<div class='center_parent panel input_form'>
-		<ul class='no_style'>
-			<li class='text_center'>
+<main class="center_parent">
+	<div class="center_parent panel input_form padding_1p275">
+		<ul class="no_style margin_0">
+			<li class="text_center">
 				<h2>Регистрация</h2>
 			</li>
 			<li>
-				<form method='post'>
-					<div class='center_parent'>
+				<form method="post">
+					<div class="center_parent margin_1_vert">
 						<?php
 						$name_input->show();
 						?>
 					</div>
-					<div class='center_parent'>
+					<div class="center_parent margin_1_vert">
 						<?php
 						$surname_input->show();
 						?>
 					</div>
-					<div class='center_parent'>
+					<div class="center_parent margin_1_vert">
 						<?php
 						$email_input->show();
 						?>
 					</div>
-					<div class='center_parent'>
+					<div class="center_parent margin_1_vert">
 						<?php
 						$password_input->show();
 						?>
 					</div>
-					<div class='center_parent'>
+					<div class="center_parent margin_1_vert">
 						<?php
 						$confirm_password_input->show();
 						?>
@@ -143,21 +143,22 @@ simpleHeaderHTML();
 					<?php
 					if (isset($error_message)) {
 						?>
-					<div class='center_parent text_center error'>
+					<div class="center_parent text_center error">
 						<p><?= htmlentities($error_message) ?></p>
 					</div>
 					<?php
 					}
 					?>
-					<div class='center_parent'>
-						<button type='submit' id='register' name='register'>
-							<span class='fa fa-user-plus margin_0p5_right'></span>Зарегистрироваться
+					<div class="center_parent margin_2_top">
+						<button type="submit" id="register" name="register">
+							<span class="fa fa-user-plus margin_0p5_right"></span>
+							<span>Зарегистрироваться</span>
 						</button>
 					</div>
 				</form>
 			</li>
-			<li class='text_center'>
-				<p>Уже есть аккаунт? <a href='/login.php'>Войти</a></p>
+			<li class="text_center">
+				<p>Уже есть аккаунт? <a href="/login.php">Войти</a></p>
 			</li>
 		</ul>
 	</div>

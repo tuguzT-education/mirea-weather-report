@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (loggedIn()) try {
-	$_SESSION['locations'] = array();
+	$_SESSION['data_locations'] = array();
 
 	$database = Database::connect();
 	$database->setDatabase('userdata');
@@ -33,7 +33,7 @@ if (loggedIn()) try {
 	}
 
 	while ($row = $result->fetch_assoc()) {
-		$_SESSION['locations'][] = $row;
+		$_SESSION['data_locations'][] = $row;
 	}
 } catch (Exception $exception) {
 	$_SESSION['error'] = $exception->getCode() === -1

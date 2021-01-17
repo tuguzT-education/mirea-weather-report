@@ -7,7 +7,7 @@ session_start();
 
 ?>
 <!DOCTYPE html>
-<html lang='ru'>
+<html lang="ru">
 <?php
 headHTML('Карта');
 ?>

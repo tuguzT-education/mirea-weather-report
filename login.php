@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang='ru'>
+<html lang="ru">
 <?php
 headHTML('Вход');
 ?>
@@ -70,20 +70,20 @@ headHTML('Вход');
 <?php
 simpleHeaderHTML();
 ?>
-<main class='center_parent'>
-	<div class='center_parent panel input_form'>
-		<ul class='no_style'>
-			<li class='text_center'>
+<main class="center_parent">
+	<div class="center_parent panel input_form padding_1p275">
+		<ul class="no_style margin_0">
+			<li class="text_center">
 				<h2>Вход</h2>
 			</li>
 			<li>
-				<form method='post'>
-					<div class='center_parent'>
+				<form method="post">
+					<div class="center_parent margin_1_vert">
 						<?php
 						$email_input->show();
 						?>
 					</div>
-					<div class='center_parent'>
+					<div class="center_parent margin_1_vert">
                         <?php
                         $password_input->show();
                         ?>
@@ -91,22 +91,23 @@ simpleHeaderHTML();
 					<?php
 					if (isset($error_message)) {
 					?>
-					<div class='center_parent text_center error'>
+					<div class="center_parent text_center error">
 						<p><?= htmlentities($error_message) ?></p>
 					</div>
 					<?php
                     }
                     ?>
-					<div class='center_parent'>
-						<button type='submit' id='login' name='login'>
-							<span class='fa fa-sign-in margin_0p5_right'></span>Войти
+					<div class="center_parent margin_2_top">
+						<button type="submit" id="login" name="login">
+							<span class="fa fa-sign-in margin_0p5_right"></span>
+							<span>Войти</span>
 						</button>
 					</div>
 				</form>
 			</li>
-			<li class='text_center'>
-				<p>Нет аккаунта? <a href='/register.php'>Зарегистрироваться</a></p>
-				<p>Также можно <a href='/account.php'>войти как гость</a></p>
+			<li class="text_center">
+				<p>Нет аккаунта? <a href="/register.php">Зарегистрироваться</a></p>
+				<p>Также можно <a href="/account.php">войти как гость</a></p>
 			</li>
 		</ul>
 	</div>

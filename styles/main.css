@@ -182,6 +182,7 @@ select {
 	border-radius: 0;
 	border: var(--wr_border_width) solid var(--wr_primary);
 	background-color: var(--wr_panel);
+	color: var(--wr_text);
 	transition: var(--wr_transition_duration);
 	box-shadow: none;
 }
@@ -333,7 +334,6 @@ div.tabs > ul li:last-child label {
 
 div.tabs > div {
 	position: relative;
-	padding: 1em;
 	border-radius: 0 var(--wr_radius) var(--wr_radius) var(--wr_radius);
 }
 
@@ -411,6 +411,7 @@ tr:hover > td {
 	top: 0;
 	left: 0;
 	display: none;
+	z-index: 2;
 }
 
 .dialog_background:target {
@@ -441,6 +442,7 @@ tr:hover > td {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	z-index: 1;
 }
 
 /* Additional attributes */
@@ -467,7 +469,6 @@ tr:hover > td {
 }
 
 .center_parent {
-	padding: 1em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
