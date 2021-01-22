@@ -114,7 +114,7 @@ div.input > span.error {
 	margin: 0.4em;
 }
 
-input {
+input[type=text], input[type=email], input[type=password] {
 	display: block;
 	background: transparent;
 	padding: 0.4em;
@@ -124,9 +124,6 @@ input {
 	color: var(--wr_text);
 	font-size: 1em;
 	transition: var(--wr_transition_duration);
-}
-
-input[type=text], input[type=email], input[type=password] {
 	min-width: 30vw;
 	width: 100%;
 	max-width: 70vw;
@@ -436,7 +433,7 @@ tr:hover > td {
 	text-align: center;
 	padding: 1.5em;
 	max-width: 90vw;
-	border: 0.15em solid var(--wr_primary);
+	border: var(--wr_border_width) solid var(--wr_primary);
 	background-color: var(--wr_panel);
 	border-radius: var(--wr_radius);
 	display: none;
@@ -455,6 +452,11 @@ tr:hover > td {
 #map {
 	height: 60vh;
 	width: 100%;
+	border-radius: var(--wr_radius);
+}
+
+#map:focus {
+	outline: var(--wr_border_width) solid var(--wr_primary);
 }
 
 /* Additional attributes */
