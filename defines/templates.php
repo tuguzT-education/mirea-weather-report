@@ -49,6 +49,7 @@ function footerHTML(): void {
 
 function simpleHeaderHTML(): void {
 ?>
+<script src="/js/timezone.js"></script>
 <header>
 	<h3 class="favicon">Weather Report</h3>
 </header>
@@ -57,6 +58,7 @@ function simpleHeaderHTML(): void {
 
 function userHeaderHTML(): void {
 ?>
+<script src="/js/timezone.js"></script>
 <header>
 	<h3 class="float_left margin_1_right favicon">Weather Report</h3>
 	<nav role="navigation" class="float_right flex">

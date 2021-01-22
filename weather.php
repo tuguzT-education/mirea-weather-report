@@ -221,6 +221,22 @@ if (loggedIn()) {
 			if (isset($data->cod) && $data->cod !== 200) {
 				?><span class="error"><?= $data->message ?></span><?php
 			} else {
+				// Set user's timezone name
+				$timezone = 'UTC';
+				if (isset($_SESSION['timezone'])) try {
+					$dt = new DateTime('now', new DateTimeZone($_SESSION['timezone']));
+					$timezone = 'GMT' . $dt->format('P');
+				} catch (Exception $exception) {}
+
+				function getTimeFromTimezone($dt): string {
+					$result = gmdate('d-m-Y H:i', $dt);
+					if (isset($_SESSION['timezone'])) try {
+						$dt = new DateTime('@' . $dt);
+						$dt->setTimezone(new DateTimeZone($_SESSION['timezone']));
+						$result = $dt->format('d-m-Y H:i');
+					} catch (Exception $exception) {}
+					return $result;
+				}
 			?>
 			<div class="tabs">
 				<input type="radio" name="add_location_tab" id="add_location_tab_1"
@@ -238,7 +254,7 @@ if (loggedIn()) {
 					<section>
 						<table class="full_width">
 							<tr>
-								<th>Время, UTC</th>
+								<th>Время, <?= $timezone ?></th>
 								<th>Температура, °C</th>
 								<th>Давление, мм. рт. ст.</th>
 								<th>Влажность, %</th>
@@ -251,7 +267,7 @@ if (loggedIn()) {
 							$data->current->pressure = round($data->current->pressure * 0.75006375541921);
 							?>
 							<tr>
-								<td><?= gmdate('d-m-Y H:i', $data->current->dt) ?></td>
+								<td><?= getTimeFromTimezone($data->current->dt) ?></td>
 								<td><?= $data->current->temp ?></td>
 								<td><?= $data->current->pressure ?></td>
 								<td><?= $data->current->humidity ?></td>
@@ -265,7 +281,7 @@ if (loggedIn()) {
 					<section>
 						<table class="full_width">
 							<tr>
-								<th>Время, UTC</th>
+								<th>Время, <?= $timezone ?></th>
 								<th>Температура, °C</th>
 								<th>Давление, мм. рт. ст.</th>
 								<th>Влажность, %</th>
@@ -279,7 +295,7 @@ if (loggedIn()) {
 								$row->pressure = round($row->pressure * 0.75006375541921);
 							?>
 							<tr>
-								<td><?= gmdate('d-m-Y H:i', $row->dt) ?></td>
+								<td><?= getTimeFromTimezone($row->dt) ?></td>
 								<td><?= $row->temp ?></td>
 								<td><?= $row->pressure ?></td>
 								<td><?= $row->humidity ?></td>
@@ -296,7 +312,7 @@ if (loggedIn()) {
 					<section>
 						<table class="full_width">
 							<tr>
-								<th>Время, UTC</th>
+								<th>Время, <?= $timezone ?></th>
 								<th>Температура, °C</th>
 								<th>Давление, мм. рт. ст.</th>
 								<th>Влажность, %</th>
@@ -310,7 +326,7 @@ if (loggedIn()) {
 								$row->pressure = round($row->pressure * 0.75006375541921);
 							?>
 							<tr>
-								<td><?= gmdate('d-m-Y H:i', $row->dt) ?></td>
+								<td><?= getTimeFromTimezone($row->dt) ?></td>
 								<td><?= "от {$row->temp->min} до {$row->temp->max}" ?></td>
 								<td><?= $row->pressure ?></td>
 								<td><?= $row->humidity ?></td>
