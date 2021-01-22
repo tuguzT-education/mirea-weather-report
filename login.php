@@ -1,10 +1,10 @@
 <?php
 
-require_once 'classes/Database.php';
-require_once 'classes/InputText.php';
-require_once 'defines/patterns.php';
-require_once 'defines/functions.php';
-require_once 'defines/templates.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/InputText.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/patterns.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/templates.php';
 
 use WeatherReport\Database;
 use WeatherReport\InputText;

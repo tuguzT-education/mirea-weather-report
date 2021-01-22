@@ -1,7 +1,7 @@
 <?php
 
 namespace {
-	require_once 'Enum.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Enum.php';
 }
 
 namespace WeatherReport\InputText {

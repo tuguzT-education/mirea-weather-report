@@ -1,7 +1,7 @@
 <?php
 
 namespace {
-	require_once 'InputTextType.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/InputTextType.php';
 }
 
 namespace WeatherReport {
@@ -39,8 +39,8 @@ namespace WeatherReport {
 		}
 
 		public function show(): void {
-			echo "<div class='input'>
-				<input id='{$this->name}' name='{$this->name}' title='{$this->title}' ";
+			echo "<div class='input'><input id='{$this->name}' name='{$this->name}' " .
+				"title='{$this->title}' value='{$this->value}'";
 			if ($this->pattern !== '') {
 				echo "pattern='{$this->pattern}' ";
 			}

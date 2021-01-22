@@ -1,9 +1,9 @@
 <?php
 
-require_once 'classes/InputText.php';
-require_once 'defines/functions.php';
-require_once 'defines/templates.php';
-require_once 'defines/patterns.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/InputText.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/templates.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/patterns.php';
 
 use WeatherReport\InputText;
 
@@ -173,31 +173,31 @@ if (loggedIn()) {
 		</a>
 	</div>
 </div>
-<main class="flex">
-	<div style="flex: 1">
-		<div class="panel padding_1p275 margin_1_vert">
-			<h3 class="margin_0p5_vert">Получить прогноз погоды</h3>
+<main>
+	<div class="panel padding_1p275 margin_2_vert center_vertically_parent">
+		<h3>Получить прогноз погоды</h3>
+		<div class="flex">
 			<?php
 			if (loggedIn()) {
 			?>
-			<a class="button border block margin_1_top" href="#locations_list">
+			<a class="button border block margin_1_right" href="#locations_list">
 				<span class="fa fa-list margin_0p5_right"></span>
 				<span>Из списка местоположений</span>
 			</a>
 			<?php
 			}
 			?>
-			<a class="button border block margin_1_top" href="#location_coordinates">
+			<a class="button border block margin_1_right" href="#location_coordinates">
 				<span class="fa fa-globe margin_0p5_right"></span>
 				<span>По координатам</span>
 			</a>
-			<a class="button border block margin_1_top" href="#location_address">
+			<a class="button border block" href="#location_address">
 				<span class="fa fa-map-marker margin_0p5_right"></span>
 				<span>По адресу</span>
 			</a>
 		</div>
 	</div>
-	<div class="padding_1" style="flex: 2">
+	<div>
 		<?php
 		if (isset($_SESSION['error'])) {
 		?>
@@ -217,6 +217,11 @@ if (loggedIn()) {
 			?>
 			<p>Широта: <b><?= (float) $_SESSION['data_weather_latitude'] ?></b></p>
 			<p>Долгота: <b><?= (float) $_SESSION['data_weather_longitude'] ?></b></p>
+			<?php
+			if (isset($data->cod) && $data->cod !== 200) {
+				?><span class="error"><?= $data->message ?></span><?php
+			} else {
+			?>
 			<div class="tabs">
 				<input type="radio" name="add_location_tab" id="add_location_tab_1"
 					   hidden aria-hidden="true" checked>
@@ -225,17 +230,17 @@ if (loggedIn()) {
 				<input type="radio" name="add_location_tab" id="add_location_tab_3"
 					   hidden aria-hidden="true">
 				<ul hidden aria-hidden="true">
-					<li><label for="add_location_tab_1">Сейчас</label></li>
-					<li><label for="add_location_tab_2">Каждый час в течение 2-х дней</label></li>
-					<li><label for="add_location_tab_3">Каждый день в течение недели</label></li>
+					<li><label class="full_height" for="add_location_tab_1">Сейчас</label></li>
+					<li><label class="full_height" for="add_location_tab_2">Каждый час в течение 2-х дней</label></li>
+					<li><label class="full_height" for="add_location_tab_3">Каждый день в течение недели</label></li>
 				</ul>
-				<div>
+				<div class="horizontal_scroll">
 					<section>
-						<table class='full_width'>
+						<table class="full_width">
 							<tr>
 								<th>Время, UTC</th>
 								<th>Температура, °C</th>
-								<th>Атмосферное давление, мм. рт. ст.</th>
+								<th>Давление, мм. рт. ст.</th>
 								<th>Влажность, %</th>
 								<th>Облачность, %</th>
 								<th>Скорость ветра, м/с</th>
@@ -262,7 +267,7 @@ if (loggedIn()) {
 							<tr>
 								<th>Время, UTC</th>
 								<th>Температура, °C</th>
-								<th>Атмосферное давление, мм. рт. ст.</th>
+								<th>Давление, мм. рт. ст.</th>
 								<th>Влажность, %</th>
 								<th>Облачность, %</th>
 								<th>Скорость ветра, м/с</th>
@@ -293,7 +298,7 @@ if (loggedIn()) {
 							<tr>
 								<th>Время, UTC</th>
 								<th>Температура, °C</th>
-								<th>Атмосферное давление, мм. рт. ст.</th>
+								<th>Давление, мм. рт. ст.</th>
 								<th>Влажность, %</th>
 								<th>Облачность, %</th>
 								<th>Скорость ветра, м/с</th>
@@ -323,6 +328,7 @@ if (loggedIn()) {
 			</div>
 		</div>
 		<?php
+			}
 		} else {
 		?>
 		<div class="center_parent">

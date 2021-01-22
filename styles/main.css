@@ -73,6 +73,12 @@ body > * {
 	padding: 0 5vw;
 }
 
+header {
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
 header, footer {
 	background-color: var(--wr_header);
 	display: block;
@@ -445,6 +451,12 @@ tr:hover > td {
 	z-index: 1;
 }
 
+/* Set style for map */
+#map {
+	height: 60vh;
+	width: 100%;
+}
+
 /* Additional attributes */
 .favicon {
 	user-select: none;
@@ -525,6 +537,10 @@ ul.no_style {
 	width: 100%;
 }
 
+.full_height {
+	height: 100%;
+}
+
 .vertical_scroll {
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -573,6 +589,10 @@ ul.no_style {
 
 .margin_2_bottom {
 	margin-bottom: 2em;
+}
+
+.margin_2_vert {
+	margin: 2em 0;
 }
 
 .margin_1_vert {

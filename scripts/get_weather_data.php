@@ -14,7 +14,6 @@ try {
 	}
 
 	unset($_SESSION['data_weather']);
-	unset($_SESSION['data_weather_name']);
 
 	if (isset($_POST['weather_choose_location_list']) && isset($_SESSION['data_locations'])) {
 		$name = $_POST['weather_choose_location_list_name'];
