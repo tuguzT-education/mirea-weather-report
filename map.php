@@ -26,7 +26,7 @@ userHeaderHTML();
 		<div class="margin_1_top" id="map_layer_select">
 			<label for="map_layer_selector" class="margin_1_right">Выберите отображаемый слой</label>
 			<select id="map_layer_selector">
-				<option value="">Без слоя</option>
+				<option>Без слоя</option>
 			</select>
 		</div>
 		<script type="module" src="/js/map.js"></script>
