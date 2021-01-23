@@ -42,12 +42,43 @@ const openWeatherMapLayers = {
 		}),
 		extent: extent
 	}),
+	precipitation: new ol.layer.Tile({
+		preload: Infinity,
+		source: new ol.source.XYZ({
+			url:
+				'https://tile.openweathermap.org/map/precipitation_new/' +
+				'{z}/{x}/{y}.png?appid=746233f13b8578f62fe9dc1730285e03'
+		}),
+		extent: extent
+	}),
 };
+
+const popup = document.getElementById('map_popup');
+const popup_close = document.getElementById('map_popup_close');
+const popup_content = document.getElementById('map_popup_content');
+const overlay = new ol.Overlay({
+	element: popup,
+	autoPan: true
+});
 
 const map = new ol.Map({
 	target: 'map',
 	layers: [OSMLayer],
-	view: view
+	view: view,
+	overlays: [overlay]
+});
+
+popup_close.onclick = function () {
+	overlay.setPosition(undefined);
+	return false;
+};
+map.on('singleclick', function (event) {
+	const coordinate = event.coordinate;
+	const lonLat = ol.proj.toLonLat(coordinate);
+	const latitude = lonLat[0];
+	const longitude = lonLat[1];
+	popup_content.innerHTML = 'Latitude: ' + latitude + '<br>Longitude: ' + longitude;
+	overlay.setPosition(coordinate);
 });
 
 let currentLayer;
@@ -63,3 +94,4 @@ selector.addEventListener('change', function() {
 selector.appendChild(new Option('Температура', 'temp'));
 selector.appendChild(new Option('Облака', 'clouds'));
 selector.appendChild(new Option('Скорость ветра', 'wind'));
+selector.appendChild(new Option('Осадки', 'precipitation'));

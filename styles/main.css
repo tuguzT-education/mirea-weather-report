@@ -459,6 +459,41 @@ tr:hover > td {
 	outline: var(--wr_border_width) solid var(--wr_primary);
 }
 
+#map_popup {
+	position: absolute;
+	width: max-content;
+	padding-right: 2em;
+	transform: translate(-50%, -115%);
+}
+
+#map_popup:after {
+	top: 100%;
+	content: ' ';
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border: 0.5rem solid transparent;
+	border-top-color: var(--wr_panel);
+	left: 47%;
+}
+
+#map_popup_close {
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	text-decoration: none;
+	color: var(--wr_text);
+}
+
+#map_popup_close:focus {
+	color: var(--wr_text);
+}
+
+#map_popup_content {
+	font-size: small;
+}
+
 /* Additional attributes */
 .favicon {
 	user-select: none;
