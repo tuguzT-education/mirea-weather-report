@@ -116,7 +116,7 @@ if (loggedIn()) {
 		if (!isset($_SESSION['weather_check_address_input'])) {
 			$input = new InputText(
 				InputText\Type::TEXT(), 'weather_check_location_address', 'Адрес',
-				'Введите адрес местоположение', -1
+				'Введите адрес местоположения', -1
 			);
 			$_SESSION['weather_check_address_input'] = serialize($input);
 		}

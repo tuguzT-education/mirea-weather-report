@@ -35,14 +35,14 @@ try {
 		$latitude = $_POST['weather_latitude'];
 		if (!isValidLatitude($latitude)) {
 			inputError('Широта должна лежать в интервале от -90° включительно ' .
-				'до 90° невключительно!', 'latitude_input', 'weather.php#location_coordinates');
+				'до 90° невключительно!', 'weather_latitude_input', 'weather.php#location_coordinates');
 		}
 		$_SESSION['data_weather_latitude'] = $latitude;
 
 		$longitude = $_POST['weather_longitude'];
 		if (!isValidLongitude($longitude)) {
 			inputError('Долгота должна лежать в интервале от -180° невключительно ' .
-				'до 180° включительно!', 'longitude_input', 'weather.php#location_coordinates');
+				'до 180° включительно!', 'weather_longitude_input', 'weather.php#location_coordinates');
 		}
 		$_SESSION['data_weather_longitude'] = $longitude;
 
