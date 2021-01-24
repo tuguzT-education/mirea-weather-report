@@ -48,11 +48,11 @@ const map = new ol.Map({
 	overlays: [overlay]
 });
 
-popup_close.onclick = function () {
+popup_close.onclick = function() {
 	overlay.setPosition(undefined);
 	return false;
 };
-map.on('singleclick', function (event) {
+map.on('singleclick', function(event) {
 	const coordinate = event.coordinate;
 	const lonLat = ol.proj.toLonLat(coordinate);
 	const latitude = lonLat[1];
@@ -64,7 +64,7 @@ map.on('singleclick', function (event) {
 	const url = 'https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru' +
 		'&lat=' + latitude + '&lon=' + longitude + '&appid=' + OWM_API_KEY;
 	request.open('GET', url, true);
-	request.onreadystatechange = function () {
+	request.onreadystatechange = function() {
 		if (request.readyState === 4 && request.status === 200) {
 			const json = JSON.parse(request.responseText);
 			popup_content.innerHTML =
@@ -81,10 +81,10 @@ map.on('singleclick', function (event) {
 });
 
 let currentLayer;
-const selector = document.getElementById('map_layer_selector');
-selector.addEventListener('change', function() {
+const layerSelector = document.getElementById('map_layer_selector');
+layerSelector.addEventListener('change', function() {
 	map.removeLayer(currentLayer);
-	const key = selector.value;
+	const key = layerSelector.value;
 	if (OWMLayers.hasOwnProperty(key)) {
 		currentLayer = OWMLayers[key];
 		map.addLayer(currentLayer);
@@ -92,5 +92,31 @@ selector.addEventListener('change', function() {
 });
 
 for (const key in layerNames) {
-	selector.appendChild(new Option(layerNames[key], key));
+	layerSelector.appendChild(new Option(layerNames[key], key));
 }
+
+const locationSelector = document.getElementById('map_location_selector');
+const defaultOption = new Option('Не выбрано...');
+defaultOption.selected = true;
+defaultOption.hidden = true;
+locationSelector.appendChild(defaultOption);
+locationSelector.addEventListener('change', function() {
+	const locationName = locationSelector.value;
+	defaultOption.selected = true;
+
+	const request = new XMLHttpRequest();
+	const url = '/scripts/ajax_get_location_coordinates.php';
+	const params = 'location_name=' + locationName;
+	request.open('POST', url, true);
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.onreadystatechange = function() {
+		if (request.readyState === 4 && request.status === 200) {
+			const json = JSON.parse(request.responseText);
+			const latitude = json.latitude;
+			const longitude = json.longitude;
+			map.getView().setCenter(ol.proj.fromLonLat([longitude, latitude]));
+			map.getView().setZoom(9);
+		}
+	};
+	request.send(params);
+});

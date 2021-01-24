@@ -524,6 +524,11 @@ tr:hover > td {
 	align-items: center;
 }
 
+select.fixed_width {
+	width: 15rem;
+	text-overflow: ellipsis;
+}
+
 ul.no_style {
 	padding-left: 0;
 	list-style: none;

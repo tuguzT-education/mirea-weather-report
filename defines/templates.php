@@ -29,9 +29,9 @@ function headMapHTML(string $title): void {
 	<meta name="keywords" content="weather, погода, прогноз погоды">
 	<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 	<link rel="mask-icon" href="/images/favicon_safari.svg">
+	<link rel="stylesheet" href="/styles/main.css" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/open_layers/ol.css">
-	<link rel="stylesheet" href="/styles/main.css" type="text/css">
 	<title><?= $title ?> | Weather Report</title>
 </head>
 <?php
