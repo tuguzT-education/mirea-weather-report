@@ -1,11 +1,13 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/InputText.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/TextArea.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/patterns.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/functions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/templates.php';
 
 use WeatherReport\InputText;
+use WeatherReport\TextArea;
 
 session_start();
 
@@ -186,6 +188,35 @@ if (loggedIn()) {
 		</a>
 	</div>
 </div>
+<?php
+if (loggedIn() && !isAdmin()) {
+?>
+<div class="dialog_background" id="admin_request">
+	<div class="dialog">
+		<h3>Отправить запрос на администрирование</h3>
+		<form action="/scripts/add_admin_request.php" method="post">
+			<div class="margin_2_bottom">
+				<?php
+				$textArea = new TextArea('admin_request_text',
+					'Введите сообщение',
+					'Введите сообщение длиной не более 2000 символов', 2000);
+				$textArea->show();
+				?>
+			</div>
+			<button type="submit" name="admin_request">
+				<span class="fa fa-envelope margin_0p5_right"></span>
+				<span>Отправить</span>
+			</button>
+		</form>
+		<a class="button border margin_1_top" href="/account.php">
+			<span class="fa fa-close margin_0p5_right"></span>
+			<span>Отмена</span>
+		</a>
+	</div>
+</div>
+<?php
+}
+?>
 <main class="flex">
 	<div style="flex: 1">
 		<div class="panel padding_1p275 margin_1_vert">
@@ -193,7 +224,7 @@ if (loggedIn()) {
 			<span>Имя пользователя: <b><?= $_SESSION['name'] ?></b></span><br>
 			<span>Фамилия пользователя: <b><?= $_SESSION['surname'] ?></b></span><br>
 			<span>Email пользователя: <a href="mailto:<?= $_SESSION['email'] ?>"><?= $_SESSION['email'] ?></a></span>
-			<a class="button border block margin_1_top" href="#add_location">
+			<a class="button border block margin_2_top" href="#add_location">
 				<span class="fa fa-plus margin_0p5_right"></span>
 				<span>Добавить местоположение</span>
 			</a>
@@ -203,6 +234,14 @@ if (loggedIn()) {
 			<a class="button border block margin_1_top" href="#remove_location">
 				<span class="fa fa-trash margin_0p5_right"></span>
 				<span>Удалить местоположение</span>
+			</a>
+			<?php
+			}
+			if (loggedIn() && !isAdmin()) {
+			?>
+			<a class="button border margin_2_top" href="#admin_request">
+				<span class="fa fa-envelope margin_0p5_right"></span>
+				<span>Запрос на администрирование</span>
 			</a>
 			<?php
 			}

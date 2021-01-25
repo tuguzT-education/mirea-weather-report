@@ -96,27 +96,29 @@ for (const key in layerNames) {
 }
 
 const locationSelector = document.getElementById('map_location_selector');
-const defaultOption = new Option('Не выбрано...');
-defaultOption.selected = true;
-defaultOption.hidden = true;
-locationSelector.appendChild(defaultOption);
-locationSelector.addEventListener('change', function() {
-	const locationName = locationSelector.value;
+if (locationSelector != null) {
+	const defaultOption = new Option('Не выбрано...');
 	defaultOption.selected = true;
+	defaultOption.hidden = true;
+	locationSelector.appendChild(defaultOption);
+	locationSelector.addEventListener('change', function() {
+		const locationName = locationSelector.value;
+		defaultOption.selected = true;
 
-	const request = new XMLHttpRequest();
-	const url = '/scripts/ajax_get_location_coordinates.php';
-	const params = 'location_name=' + locationName;
-	request.open('POST', url, true);
-	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	request.onreadystatechange = function() {
-		if (request.readyState === 4 && request.status === 200) {
-			const json = JSON.parse(request.responseText);
-			const latitude = json.latitude;
-			const longitude = json.longitude;
-			map.getView().setCenter(ol.proj.fromLonLat([longitude, latitude]));
-			map.getView().setZoom(9);
-		}
-	};
-	request.send(params);
-});
+		const request = new XMLHttpRequest();
+		const url = '/scripts/ajax_get_location_coordinates.php';
+		const params = 'location_name=' + locationName;
+		request.open('POST', url, true);
+		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		request.onreadystatechange = function() {
+			if (request.readyState === 4 && request.status === 200) {
+				const json = JSON.parse(request.responseText);
+				const latitude = json.latitude;
+				const longitude = json.longitude;
+				map.getView().setCenter(ol.proj.fromLonLat([longitude, latitude]));
+				map.getView().setZoom(9);
+			}
+		};
+		request.send(params);
+	});
+}

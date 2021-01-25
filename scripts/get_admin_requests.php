@@ -10,28 +10,24 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (loggedIn() && isAdmin()) try {
-	$_SESSION['data_users'] = array();
+	$_SESSION['data_admin_requests'] = array();
 
 	$database = Database::connect();
 	$database->setDatabase('userdata');
 
-	$query = 'SELECT `name`, `surname`, `email`, `roleID` FROM `general`';
+	$query = 'SELECT * FROM `admin_requests`';
 	$result = $database->query($query);
 	if ($result->num_rows === 0) {
-		throw new Exception('Список пользователей пуст!', -1);
+		throw new Exception('Список запросов пуст!', -1);
 	}
 
-	$query = 'SELECT `name` FROM `roles` WHERE id = ?';
+	$query = 'SELECT `name`, `surname` FROM `general` WHERE `email` = ?';
 	while ($row = $result->fetch_assoc()) {
-		if (strcmp($row['email'], $_SESSION['email']) !== 0) {
-			$temp = $database->query($query, (int) $row['roleID']);
-			$name = $temp->fetch_assoc()['name'];
-			$row['role'] = $name;
-			$_SESSION['data_users'][] = $row;
-		}
-	}
-	if (empty($_SESSION['data_users'])) {
-		throw new Exception('Список других пользователей пуст!', -1);
+		$temp = $database->query($query, $row['email']);
+		$temp = $temp->fetch_assoc();
+		$row['name'] = $temp['name'];
+		$row['surname'] = $temp['surname'];
+		$_SESSION['data_admin_requests'][] = $row;
 	}
 } catch (Exception $exception) {
 	$_SESSION['error'] = $exception->getCode() === -1

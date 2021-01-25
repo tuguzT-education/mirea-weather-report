@@ -143,6 +143,7 @@ input + label {
 	pointer-events: none;
 	user-select: none;
 	position: absolute;
+	width: max-content;
 	top: 0.4em;
 	left: 0.4em;
 	transition: var(--wr_transition_duration);
@@ -171,6 +172,74 @@ input:not(:focus):invalid:not(:placeholder-shown) {
 }
 
 input:not(:focus):invalid:not(:placeholder-shown) + label {
+	top: -1.4em;
+	font-weight: bold;
+	font-size: 0.85em;
+	color: var(--wr_tomato);
+}
+
+/* Set style of textarea */
+textarea {
+	resize: none;
+	font-size: medium;
+	outline: none;
+	overflow: auto;
+	user-select: all;
+	padding: 0.4em;
+	color: var(--wr_text);
+	background-color: var(--wr_panel);
+	border: var(--wr_border_width) solid var(--wr_text);
+	border-radius: var(--wr_radius);
+	transition: var(--wr_transition_duration);
+	min-width: 30vw;
+	width: 100%;
+	max-width: 70vw;
+	min-height: 20vh;
+	height: 100%;
+}
+
+textarea::placeholder {
+	user-select: none;
+}
+
+textarea + label {
+	background: transparent;
+	pointer-events: none;
+	user-select: none;
+	position: absolute;
+	width: max-content;
+	top: 0.4em;
+	left: 0.4em;
+	transition: var(--wr_transition_duration);
+}
+
+textarea:focus {
+	border-color: var(--wr_primary);
+}
+
+textarea:focus + label {
+	top: -1.4em;
+	font-weight: bold;
+	font-size: 0.85em;
+	color: var(--wr_primary);
+}
+
+textarea:not(:focus):valid:not(:placeholder-shown) {
+	border-color: var(--wr_green_tea);
+}
+
+textarea:not(:focus):valid:not(:placeholder-shown) + label {
+	top: -1.4em;
+	font-weight: bold;
+	font-size: 0.85em;
+	color: var(--wr_green_tea);
+}
+
+textarea:not(:focus):invalid:not(:placeholder-shown) {
+	border-color: var(--wr_tomato);
+}
+
+textarea:not(:focus):invalid:not(:placeholder-shown) + label {
 	top: -1.4em;
 	font-weight: bold;
 	font-size: 0.85em;

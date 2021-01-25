@@ -10,24 +10,13 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 try {
-	if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['make_admin'])) {
+	if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['decline_admin'])) {
 		throw new Exception('Ошибка: нет POST-запроса!', -1);
 	}
-	$email = $_POST['make_admin_email'];
-	foreach ($_SESSION['data_users'] as $row) {
-		if (strcmp($row['email'], $email) === 0) {
-			if ($row['roleID'] == 1) {
-				throw new Exception('Данный пользователь уже является администратором!', -1);
-			}
-			break;
-		}
-	}
+	$email = $_POST['decline_admin'];
 
 	$database = Database::connect();
 	$database->setDatabase('userdata');
-
-	$query = 'UPDATE `general` SET `roleID` = 1 WHERE `email` = ?';
-	$database->query($query, $email);
 
 	$query = 'DELETE FROM `admin_requests` WHERE `email` = ?';
 	$database->query($query, $email);
