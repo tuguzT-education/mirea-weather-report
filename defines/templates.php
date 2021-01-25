@@ -41,7 +41,7 @@ function footerHTML(): void {
 ?>
 <footer>
 	<p>Автор сайта: <b>Тугушев Тимур</b><br>
-		Адрес электронной почты:
+		<span>Адрес электронной почты: </span>
 		<a href="mailto:timurka.tugushev@gmail.com">timurka.tugushev@gmail.com</a></p>
 </footer>
 <?php
@@ -71,33 +71,44 @@ function userHeaderHTML(): void {
 		<?php
 		if (loggedIn()) {
 		?>
-			<ul class="no_style menu margin_0 padding_0">
-				<li>
-					<button class="button padding_1p275">
-						<span class="fa fa-user-circle margin_0p5_right"></span>
-						<span><?= "{$_SESSION['name']} {$_SESSION['surname']}" ?></span>
-						<span class="fa fa-angle-down margin_0p5_left"></span>
-					</button>
-					<ul class="no_style dropdown">
-						<li>
-							<a href="/account.php" class="button padding_1p275">
-								<span class="fa fa-home margin_0p5_right"></span>Личный кабинет
-							</a>
-						</li>
-						<li>
-							<a href="/scripts/logout.php" class="button padding_1p275">
-								<span class="fa fa-sign-out margin_0p5_right"></span>Выйти
-							</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
+		<ul class="no_style menu margin_0 padding_0">
+			<li>
+				<button class="button padding_1p275">
+					<span class="fa fa-user-circle margin_0p5_right"></span>
+					<span><?= "{$_SESSION['name']} {$_SESSION['surname']}" ?></span>
+					<span class="fa fa-angle-down margin_0p5_left"></span>
+				</button>
+				<ul class="no_style dropdown">
+					<li>
+						<a href="/account.php" class="button padding_1p275">
+							<span class="fa fa-home margin_0p5_right"></span>Личный кабинет
+						</a>
+					</li>
+					<?php
+					if (isAdmin()) {
+					?>
+					<li>
+						<a href="/admin_panel.php" class="button padding_1p275">
+							<span class="fa fa-unlock-alt margin_0p5_right"></span>Панель администратора
+						</a>
+					</li>
+					<?php
+					}
+					?>
+					<li>
+						<a href="/scripts/logout.php" class="button padding_1p275">
+							<span class="fa fa-sign-out margin_0p5_right"></span>Выйти
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
 		<?php
 		} else {
 		?>
-			<a href="/account.php" class="button padding_1p275">
-				<span class="fa fa-user-circle margin_0p5_right"></span>Личный кабинет
-			</a>
+		<a href="/account.php" class="button padding_1p275">
+			<span class="fa fa-user-circle margin_0p5_right"></span>Личный кабинет
+		</a>
 		<?php
 		}
 		?>

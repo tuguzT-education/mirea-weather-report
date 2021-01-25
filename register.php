@@ -79,15 +79,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                 `surname` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
                 `email` VARCHAR(320) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
                 `password` VARCHAR(96) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+                `roleID` TINYINT NOT NULL DEFAULT 0,
                 PRIMARY KEY (`email`)
             ) ENGINE=MyISAM;'
 		);
 
 		$password = password_hash($password, PASSWORD_ARGON2I);
-		$query = 'INSERT INTO `general` VALUES(?, ?, ?, ?);';
+		$query = 'INSERT INTO `general` VALUES(?, ?, ?, ?, 0);';
 		$database->query($query, $name, $surname, $email, $password);
 
-		login($name, $surname, $email);
+		login($name, $surname, $email, 0);
 		redirect('account.php');
 	} catch (Exception $exception) {
 		$error_message = "Внутренняя ошибка №{$exception->getCode()}: \"{$exception->getMessage()}\"";

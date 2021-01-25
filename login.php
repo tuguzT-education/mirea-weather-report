@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 		$database = Database::connect();
 		$database->setDatabase('userdata');
 
-		$query = 'SELECT name, surname, email, password FROM general WHERE email=? LIMIT 1';
+		$query = 'SELECT name, surname, email, password, roleID FROM general WHERE email=? LIMIT 1';
 		$result = $database->query($query, $email);
 
 		$row = $result->fetch_assoc();
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 		$email_input->setValue($email);
 
 		if (password_verify($password, $row['password'])) {
-			login($row['name'], $row['surname'], $email);
+			login($row['name'], $row['surname'], $email, $row['roleID']);
 			redirect('account.php');
 		} else {
 			throw new Exception(

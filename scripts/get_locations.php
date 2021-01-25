@@ -21,7 +21,6 @@ if (loggedIn()) try {
 			`email` VARCHAR(320) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
 			`latitude` DECIMAL(10, 8) NOT NULL,
 			`longitude` DECIMAL(11, 8) NOT NULL,
-			UNIQUE (`name`),
 			FOREIGN KEY (`email`) REFERENCES `general`(`email`)
 		) ENGINE=MyISAM;'
 	);

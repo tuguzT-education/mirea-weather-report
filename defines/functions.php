@@ -59,13 +59,18 @@ function redirect(string $path): void {
 	exit();
 }
 
-function login(string $name, string $surname, string $email): void {
+function login(string $name, string $surname, string $email, int $roleID): void {
 	session_start();
 	$_SESSION = [
 		'name' => $name,
 		'surname' => $surname,
 		'email' => $email,
+		'roleID' => $roleID,
 	];
+}
+
+function isAdmin(): bool {
+	return isset($_SESSION['roleID']) && $_SESSION['roleID'] !== 0;
 }
 
 function loggedIn() : bool {

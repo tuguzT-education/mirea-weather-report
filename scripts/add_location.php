@@ -22,6 +22,12 @@ try {
 			inputError('Название не может быть пустым!',
 				'name_input', 'account.php#add_location');
 		}
+		foreach ($_SESSION['data_locations'] as $row) {
+			if (strcmp($row['name'], $name) === 0) {
+				inputError('Местоположение с таким названием уже существует!',
+					'name_input', 'account.php#add_location');
+			}
+		}
 
 		$latitude = $_POST['add_location_latitude'];
 		if (!isValidLatitude($latitude)) {
@@ -42,6 +48,11 @@ try {
 		$database->query($query, $name, $_SESSION['email'], $latitude, $longitude);
 	} elseif (isset($_POST['add_location_address'])) {
 		$name = $_POST['add_location_selected_address'];
+		foreach ($_SESSION['data_locations'] as $row) {
+			if (strcmp($row['name'], $name) === 0) {
+				throw new Exception('Местоположение с таким названием уже существует!', -1);
+			}
+		}
 		$data_geocoding = unserialize($_SESSION['data_geocoding'])->items;
 		foreach ($data_geocoding as $item) {
 			if (strcmp($item->title, $name) === 0) {
