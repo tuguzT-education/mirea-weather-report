@@ -32,6 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 		$database = Database::connect();
 		$database->setDatabase('userdata');
 
+		$database->query('
+            CREATE TABLE IF NOT EXISTS `general` (
+                `name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                `surname` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                `email` VARCHAR(320) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+                `password` VARCHAR(60) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+                `roleID` TINYINT NOT NULL DEFAULT 0,
+                PRIMARY KEY (`email`)
+            ) ENGINE=MyISAM;'
+		);
+
 		$query = 'SELECT name, surname, email, password, roleID FROM general WHERE email=? LIMIT 1';
 		$result = $database->query($query, $email);
 

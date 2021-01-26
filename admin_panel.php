@@ -94,17 +94,7 @@ if (loggedIn() && isAdmin()) {
 		</ul>
 		<div class="padding_1p275 panel">
 			<section>
-				<div class="margin_1_bottom flex">
-					<a class="button border margin_1_right" href="#remove_user">
-						<span class="fa fa-trash margin_0p5_right"></span>
-						<span>Удалить пользователя</span>
-					</a>
-					<a class="button border margin_1_right" href="#make_admin">
-						<span class="fa fa-lock margin_0p5_right"></span>
-						<span>Выдать права администратора</span>
-					</a>
-				</div>
-				<div class="margin_1_top horizontal_scroll">
+				<div class="horizontal_scroll">
 					<?php
 					if (isset($_SESSION['error'])) {
 					?>
@@ -114,6 +104,16 @@ if (loggedIn() && isAdmin()) {
 					<?php
 					} elseif (isset($_SESSION['data_users'])) {
 					?>
+					<div class="margin_1_bottom flex">
+						<a class="button border margin_1_right" href="#remove_user">
+							<span class="fa fa-trash margin_0p5_right"></span>
+							<span>Удалить пользователя</span>
+						</a>
+						<a class="button border margin_1_right" href="#make_admin">
+							<span class="fa fa-lock margin_0p5_right"></span>
+							<span>Выдать права администратора</span>
+						</a>
+					</div>
 					<div class="border">
 						<table class="full_width">
 							<caption>Пользователи (не включая Вас: <?= count($_SESSION['data_users']) ?>)</caption>
