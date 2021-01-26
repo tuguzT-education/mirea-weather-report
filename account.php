@@ -14,6 +14,7 @@ session_start();
 $fullName = loggedIn() ? "{$_SESSION['name']} {$_SESSION['surname']}" : 'Гость';
 
 if (loggedIn()) {
+	update();
 	if (!isset($_SESSION['error'])) {
 		require 'scripts/get_locations.php';
 	}
@@ -223,7 +224,14 @@ if (loggedIn() && !isAdmin()) {
 			<h3 class="margin_0p5_vert">Данные пользователя</h3>
 			<span>Имя пользователя: <b><?= $_SESSION['name'] ?></b></span><br>
 			<span>Фамилия пользователя: <b><?= $_SESSION['surname'] ?></b></span><br>
-			<span>Email пользователя: <a href="mailto:<?= $_SESSION['email'] ?>"><?= $_SESSION['email'] ?></a></span>
+			<span>Email пользователя: <a href="mailto:<?= $_SESSION['email'] ?>"><?= $_SESSION['email'] ?></a></span><br>
+			<?php
+			if (isAdmin()) {
+			?>
+			<p><b>Вы являетесь администратором!</b></p>
+			<?php
+			}
+			?>
 			<a class="button border block margin_2_top" href="#add_location">
 				<span class="fa fa-plus margin_0p5_right"></span>
 				<span>Добавить местоположение</span>

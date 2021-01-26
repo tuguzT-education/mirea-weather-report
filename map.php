@@ -25,6 +25,7 @@ userHeaderHTML();
 			<h3 class="margin_0">Интерактивная погодная карта</h3>
 			<?php
 			if (loggedIn() && isset($_SESSION['data_locations']) && !empty($_SESSION['data_locations'])) {
+				update();
 			?>
 			<div style="margin-left: auto">
 				<label for="map_location_selector">Местоположение</label>

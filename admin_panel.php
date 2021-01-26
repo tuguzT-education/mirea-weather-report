@@ -16,6 +16,7 @@ headMapHTML('Карта');
 userHeaderHTML();
 
 if (loggedIn() && isAdmin()) {
+	update();
 	include_once 'scripts/get_users.php';
 ?>
 <div class="dialog_background" id="remove_user">

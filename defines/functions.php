@@ -1,7 +1,10 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/InputText.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/defines/apis.php';
+
+use WeatherReport\Database;
 
 function curlExecute(string $url) {
 	$curl = curl_init();
@@ -60,13 +63,37 @@ function redirect(string $path): void {
 }
 
 function login(string $name, string $surname, string $email, int $roleID): void {
-	session_start();
+	if (session_status() === PHP_SESSION_NONE) {
+		session_start();
+	}
 	$_SESSION = [
 		'name' => $name,
 		'surname' => $surname,
 		'email' => $email,
 		'roleID' => $roleID,
 	];
+}
+
+function update(): void {
+	if (session_status() === PHP_SESSION_NONE) {
+		session_start();
+	}
+	try {
+		$database = Database::connect();
+		$database->setDatabase('userdata');
+
+		$query = 'SELECT `name`, `surname`, `email`, `roleID` FROM `general` WHERE `email` = ?';
+		$result = $database->query($query, $_SESSION['email'])->fetch_assoc();
+
+		$_SESSION = [
+			'name' => $result['name'],
+			'surname' => $result['surname'],
+			'email' => $result['email'],
+			'roleID' => $result['roleID'],
+		];
+	} catch (Exception $exception) {
+		logout();
+	}
 }
 
 function isAdmin(): bool {
@@ -78,7 +105,9 @@ function loggedIn() : bool {
 }
 
 function logout(): void {
-	session_start();
+	if (session_status() === PHP_SESSION_NONE) {
+		session_start();
+	}
 	session_destroy();
 	redirect('login.php');
 }

@@ -9,6 +9,10 @@ use WeatherReport\InputText;
 
 session_start();
 
+if (loggedIn()) {
+	update();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
