@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             ) ENGINE=MyISAM;'
 		);
 
-		$query = 'SELECT `name`, `surname`, `email`, `password`, `roleID` FROM general WHERE `email` = ?';
+		$query = 'SELECT `name`, `surname`, `email`, `password`, `roleID` FROM `general` WHERE `email` = ?';
 		$result = $database->query($query, $email);
 
 		$row = $result->fetch_assoc();

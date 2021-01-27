@@ -29,6 +29,9 @@ try {
 	$query = 'DELETE FROM `locations` WHERE email = ?';
 	$database->query($query, $email);
 
+	$query = 'DELETE FROM `admin_requests` WHERE email = ?';
+	$database->query($query, $email);
+
 	$query = 'DELETE FROM `general` WHERE email = ?';
 	$database->query($query, $email);
 } catch (Exception $exception) {
