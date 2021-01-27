@@ -85,12 +85,10 @@ function update(): void {
 		$query = 'SELECT `name`, `surname`, `email`, `roleID` FROM `general` WHERE `email` = ?';
 		$result = $database->query($query, $_SESSION['email'])->fetch_assoc();
 
-		$_SESSION = [
-			'name' => $result['name'],
-			'surname' => $result['surname'],
-			'email' => $result['email'],
-			'roleID' => $result['roleID'],
-		];
+		$_SESSION['name'] = $result['name'];
+		$_SESSION['surname'] = $result['surname'];
+		$_SESSION['email'] = $result['email'];
+		$_SESSION['roleID'] = $result['roleID'];
 	} catch (Exception $exception) {
 		logout();
 	}
